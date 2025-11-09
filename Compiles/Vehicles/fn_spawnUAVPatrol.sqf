@@ -65,6 +65,8 @@ try {
 	//[_group,_difficulty,GMSAI_money] call GMSCore_fnc_setupGroupMoney;
 	_uav = [
 		_className,
+		_patrolArea,
+		_markerDelete,
 		_group,	
 		_pos, 
 		0, 			// dir
@@ -79,12 +81,6 @@ try {
 
 	if (isNull _uav) throw -1;
 	
-	[
-		_group,
-		_patrolArea,
-		_markerDelete
-	] call GMSCore_fnc_airInitializeWaypointsAreaPatrol;
-
 	[_uav,GMSAI_forbidenWeapons,GMSAI_forbidenMagazines] call GMSCore_fnc_disableVehicleWeapons;
 	[_uav,GMSAI_disabledSensors] call GMSCore_fnc_disableVehicleSensors;
 	if (GMSAI_disableInfrared) then {_uav disableTIEquipment true};	

@@ -82,6 +82,8 @@ try {
 
 	_aircraft = [
 		_classname,
+		_patrolArea,
+		_markerDelete,
 		_group,
 		_pos,
 		0,  	//  dir
@@ -92,16 +94,18 @@ try {
 		GMSAI_vehicleDeleteTimer,
 		[GMSAI_fnc_aircraftHit],
 		[GMSAI_fnc_vehicleKilled]
-	] call GMSCore_fnc_spawnPatrolAircraft;
+	] call GMSCore_fnc_spawnPatrolAir;
 	//[format["_spawnAircraftPatrol: GMSCore_fnc_spawnPatrolAircraft returned _aircraft %1",_aircraft]] call GMSAI_fnc_log;
 	if (isNull _aircraft) throw -1;
 
+	/*
 	[
 		_group,
 		_patrolArea,
 		_markerDelete
-	] call GMSCore_fnc_airInitializeWaypointsAreaPatrol;
-	
+	] call GMSCore_fnc_initializeWaypointsAreaPatrolAir;
+	*/
+		
 	[_aircraft,GMSAI_forbidenWeapons,GMSAI_forbidenMagazines] call GMSCore_fnc_disableVehicleWeapons;
 	[_aircraft,GMSAI_disabledSensors] call GMSCore_fnc_disableVehicleSensors;
 	if (GMSAI_disableInfrared) then {_heli disableTIEquipment true};

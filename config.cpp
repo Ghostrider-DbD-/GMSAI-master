@@ -11,7 +11,7 @@
 */
 class GMSAI_Build {
 	version = "1.11";
-	build = "45";
+	build = "46";
 	buildDate = "11-09-25";
 };
 class CfgPatches {
