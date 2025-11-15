@@ -60,16 +60,25 @@ private _debugMarkers = [];
 				//diag_log format["spawnPatrolTypes: case vehicle: _difficulty = %1",_difficulty];
 				if (_types isEqualTo []) then {_types = GMSAI_patrolVehicles};
 				private _vehDiff = [_difficulty] call GMSCore_fnc_getIntegerFromRange;
-				//diag_log format["spawnPatrolTypes: case vehicle:",_vehDiff];
+				/*
+ 				params[
+					"_difficulty",
+					"_classname",			// className of vehicle to spawn
+					"_pos",					// Random position for patrols that roam the whole map 
+											// or center of the area to be patrolled for those that are restricted to a smaller region
+					["_patrolArea", [] call GMSCore_fnc_getMapMarker],  // "Map" will direct the vehicle to patrol the entire map, "Region", a smaller portion of the map.
+					["_markerDelete",false],
+					["_spawnOnRoad",true],
+					["_isSubmersible",false] 		 //  when true, the swimIndepth will be set to (ASL - AGL)/2
+				];  
+
+				*/
 				private _t = [
 					_vehDiff,
 					selectRandomWeighted _types,
 					_groupSpawnPos,
 					_patrolAreaMarker,
-					GMSAI_BlacklistedLocations,
-					GMSAI_waypointTimeout,
-					_markerDelete,
-					true // no reason to spawnOnRoads for these patrols
+					_markerDelete			
 				] call GMSAI_fnc_spawnVehiclePatrol;
 				_group = _t select 0;		
 			};
@@ -82,7 +91,7 @@ private _debugMarkers = [];
 					_groupSpawnPos,
 					_patrolAreaMarker,
 					[],
-					300,					
+					//300,					
 					_markerDelete,  // always use false: we will delete the marker(s) separately for these more complex patrols
 					true  // force spawning on roads
 				] call GMSAI_fnc_spawnUGVPatrol;
@@ -97,7 +106,7 @@ private _debugMarkers = [];
 					selectRandomWeighted _types,
 					_groupSpawnPos,
 					_patrolAreaMarker,
-					[],
+					//[],
 					300,
 					_markerDelete  // always use false: we will delete the marker(s) separately for these more complex patrols
 				] call GMSAI_fnc_spawnUAVPatrol;

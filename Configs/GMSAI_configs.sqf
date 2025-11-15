@@ -552,7 +552,7 @@ GMSAI_aircraftTypes = [
 	//"B_Heli_Transport_03_unarmed_F",5
 ];
 
-GMSAI_numberOfUAVPatrols = 1;
+GMSAI_numberOfUAVPatrols = 0;
 GMSAI_UAVTypes = [  //  note that faction may matter here.
 	// East 
 	"O_UAV_01_F",2,  // Darter equivalent, unarmed

@@ -5,11 +5,12 @@
 			Locations: are any town, city etc defined at startup. 
 
 	Parameters: 
+		_difficulty 
+		_className
 		_pos, position to spawn chopper 
-		_patrolArea - can be "Map" or "Region". "Region will respect the boundaries of a map marker while Map will patrol the entire map. 
-		_blackListed - areas to avoid formated as [[x,y,z],radius]
-		_center, center of the area, either mapCenter of center of the patrol area 
-		_timeout - how long to wait before deciding the chopper is 'stuck'
+		_patrolArea 
+		_marderDelete 
+
 
 	Returns: [
 		_group, the group spawned to man the heli 
