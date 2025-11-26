@@ -153,8 +153,8 @@ for "_i" from 1 to (count GMSAI_vehiclePatrols) do {
 					// Vehicle is automatically moved to the cue for empty vehicles and handled according to setting passed when it was spawned  
 					//diag_log format["_monitorVehiclePatrols(case 4) called"];
 					private _patrolArea = createMarkerLocal[format["GMSAI_remnant%1",_crewGroup],getPosATL _vehicle];
-					{_crewGroup reveal[_x,4]} forEach [(getPosATL (leader _crewGroup)), 150] call GMSCore_fnc_nearestPlayers; 
-					_crewGroup setVariable["target",_nearPlayers select 0];
+					//{_crewGroup reveal[_x,4]} forEach [(getPosATL (leader _crewGroup)), 150] call GMSCore_fnc_nearestPlayers; 
+					//_crewGroup setVariable["target",_nearPlayers select 0];
 					_patrolArea setMarkerShapeLocal "RECTANGLE";
 					_patrolArea setMarkerSizeLocal [150,150];
 					//  	_area params["_patrolAreaMarker","_staticAiDescriptor","_areaActive","_spawnedGroups","_debugMarkers","_respawnAt","_timesSpawned","_lastDetected","_markerDelete","_lastPingedPlayer"];
@@ -185,15 +185,23 @@ for "_i" from 1 to (count GMSAI_vehiclePatrols) do {
 						true,
 						10000000
 					] call GMSAI_fnc_addActiveSpawn; 
+
+					/*
+					params[
+					["_group",grpNull],  // group for which to configure / initialize waypoints
+					["_patrolAreaMarker",""],  // a marker or array defining the patrol area center, size and shape
+					["_deletemarker",false],
+					["_garrisonChance",0]  // chance that an infantry group will garison an building of type house - ignored for vehicles.
+					];  
+					*/
+
 					[
 						_crewGroup,
-						GMSAI_BlacklistedLocations,
-						_patrolArea,
-						300,  // waypoint timeout
-						GMSAI_chanceToGarisonBuilding,
-						"Infantry",
-						false  // do not delete marker defining patrol area of the group is all dead
-					] call GMSCore_fnc_initializeWaypointsAreaPatrol;
+						_patrolArea,  
+						false, // do not delete marker defining patrol area of the group is all dead// waypoint timeout
+						GMSAI_chanceToGarisonBuilding
+					] call GMSCore_fnc_initializeWaypointsAreaPatrolInfantry;
+
 					GMSAI_vehiclePatrols pushBack _vehiclePatrol;					
 			};		
 		};

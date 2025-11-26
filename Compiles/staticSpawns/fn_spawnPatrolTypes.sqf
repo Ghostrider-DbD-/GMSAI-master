@@ -117,12 +117,21 @@ private _debugMarkers = [];
 				//diag_log format["spawnPatrolTypes: case AIR: _difficulty = %1",_difficulty];
 				if (_types isEqualTo []) then {_types = GMSAI_aircraftTypes};
 				private _airDiff = [_difficulty] call GMSCore_fnc_getIntegerFromRange;
-				//diag_log format["spawnPatrolTypes: case AIR:",_airDiff];
+				_pos = [_patrolAreaMarker, []] call GMSAI_fnc_findPositionAirPatrol;
+				/*
+					params[
+						["_difficulty",0],
+						["_className",""],			// className of the aircraft to spawn
+						["_pos",[0,0,0]],					// Random position for patrols that roam the whole map 
+												// or center of the area to be patrolled for those that are restricted to a smaller region
+						["_patrolArea","Map"],  // "Map" will direct the chopper to patrol the entire map, "Region", a smaller portion of the map.
+						["_markerDelete",false]
+					];				
+				*/
 				private _t = [
 					_airDiff,										
 					selectRandomWeighted _types,					
-					// We will let GMSCore find a position for this new aircraft patrol
-					//_groupSpawnPos,
+					_pos,
 					_patrolAreaMarker,
 					_markerDelete  // always use false: we will delete the marker(s) separately for these more complex patrols
 				] call GMSAI_fnc_spawnAircraftPatrol;

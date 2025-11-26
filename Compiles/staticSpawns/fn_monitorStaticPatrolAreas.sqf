@@ -61,10 +61,6 @@ for "_i" from 1 to (count GMSAI_StaticSpawns) do
 			if (!(isNull _group) && (({alive _x} count (units _group)) > 0)) then 
 			{
 				_aliveGroups pushBack _group;
-				if (GMSAI_debug >= 1) then 
-				{
-					[_group] call GMSAI_fnc_updateGroupDebugMarker;
-				};
 			};
 		} forEach _spawnedGroups;
 		// Handle the case in which the area has no players and despawn AI after a certain interval then configure the area to be triggered again.	
@@ -153,7 +149,7 @@ for "_i" from 1 to (count GMSAI_StaticSpawns) do
 						if (random(1) < _chance) then
 						{
 							private _players = allPlayers inAreaArray _patrolAreaMarker;
-							if !(_players isEqualTo []) then 						
+							if (!(_players isEqualTo []) || (GMSAI_debug > 0)) then 						
 							{
 								_area set[areaActiveIndex,true];
 								_area set[timesSpawnedIndex, _timesSpawned + 1];
