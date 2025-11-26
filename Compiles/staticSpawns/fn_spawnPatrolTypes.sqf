@@ -32,13 +32,14 @@ private _debugMarkers = [];
 	_x params["_groupType","_groups","_types"];
 	//[format["GMSAI_fnc_spawnPatrolTypes: _groupType %1 | _groups %2 | _types %3",_groupType,_groups,_types]] call GMSAI_fnc_log;
 	private "_group";
-	// params["_areaMarker","_noPositionsToFind",["_units",[]],["_separation",100],["_blackList",[]]];
+	
+	private _spawnOnWater = if (surfaceIsWater (markerPos _patrolAreaMarker)) then {true} else {false};
+	//params[["_areaMarker",""],["_noPositionsToFind",0],["_testIsAllowed", true],["_allowWater", false]];		
 	private _locations = [
 			_patrolAreaMarker,
 			[_groups] call GMSCore_fnc_getIntegerFromRange,
-			_players,
-			10,
-			["water"]						
+			true,
+			_spawnOnWater
 	] call GMSCore_fnc_findRandomPosWithinArea;
 
 	{
@@ -120,7 +121,8 @@ private _debugMarkers = [];
 				private _t = [
 					_airDiff,										
 					selectRandomWeighted _types,					
-					_groupSpawnPos,
+					// We will let GMSCore find a position for this new aircraft patrol
+					//_groupSpawnPos,
 					_patrolAreaMarker,
 					_markerDelete  // always use false: we will delete the marker(s) separately for these more complex patrols
 				] call GMSAI_fnc_spawnAircraftPatrol;
