@@ -100,7 +100,7 @@ private _debugMarkers = [];
 				[format["GMSAI_fnc_spawnPatrolTypes: spawned UGV patrol with group %1 | count GMSAI_UGVGroups %2",_group, GMSAI_UGVGroups]] call GMSAI_fnc_log;
 			};
 			case GMSAI_uav: {
-				//diag_log format["spawnPatrolTypes: case UAV"];
+				diag_log format["spawnPatrolTypes: case UAV"];
 				if (_types isEqualTo []) then {_types = GMSAI_UAVTypes};
 				private _t = [
 					[_difficulty] call GMSCore_fnc_getIntegerFromRange,
@@ -141,10 +141,6 @@ private _debugMarkers = [];
 		//[format["_fnc_spawnPatrolTypes: _group spawned = %1",_group]] call GMSAI_fnc_log;
 		if !(isNull _group) then 
 		{
-			if (GMSAI_debug >= 1) then {
-				private _m = ([_group] call GMSAI_fnc_addGroupDebugMarker);
-				_debugMarkers pushBack _m;
-			};
 			_spawnedGroups pushBack _group;
 		};
 	} forEach _locations;

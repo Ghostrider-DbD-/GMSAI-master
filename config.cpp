@@ -11,7 +11,7 @@
 */
 class GMSAI_Build {
 	version = "1.12";
-	build = "50";
+	build = "51";
 	buildDate = "11-26-25";
 };
 class CfgPatches {
@@ -53,12 +53,12 @@ class CfgFunctions {
 		};	
 		class Groups {
 			file = "\x\addons\GMSAI\Compiles\Groups";
-			class addGroupDebugMarker {};
-			class deleteGroupDebugMarkers {};
-			class getGroupDebugMarker {};
-			class monitorGroupDebugMarkers {};
+			//class addGroupDebugMarker {};
+			//class deleteGroupDebugMarkers {};
+			//class getGroupDebugMarker {};
+			//class monitorGroupDebugMarkers {};
 			class spawnInfantryGroup {};			
-			class updateGroupDebugMarker {};
+			//class updateGroupDebugMarker {};
 		};			
 		class Initialization {
 			// Initialization of static spawn points is handled by these functions
