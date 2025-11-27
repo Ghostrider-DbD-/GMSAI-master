@@ -12,7 +12,8 @@
 	Notes:
 		Need to add code to track respawns here.
 
-	TODO: Add check for UAV/UGV
+	TODO: Does not yet handle shps or submersibles
+	TODO: Take out any uiSleeps when this is sorted
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp"
@@ -68,19 +69,20 @@ private _debugMarkers = [];
 					"_pos",					// Random position for patrols that roam the whole map 
 											// or center of the area to be patrolled for those that are restricted to a smaller region
 					["_patrolArea", [] call GMSCore_fnc_getMapMarker],  // "Map" will direct the vehicle to patrol the entire map, "Region", a smaller portion of the map.
-					["_markerDelete",false],
-					["_spawnOnRoad",true],
-					["_isSubmersible",false] 		 //  when true, the swimIndepth will be set to (ASL - AGL)/2
+					["_markerDelete",false]
 				];  
 
 				*/
+				private _vehType = selectRandomWeighted _types;
+				[format["_spanPatrolTypes-GMSAI_vehicle: _vehType %1 | _groupSpawnPos %2", _vehType, _groupSpawnPos]] call GMSAI_fnc_log;
 				private _t = [
 					_vehDiff,
-					selectRandomWeighted _types,
+					_vehType,
 					_groupSpawnPos,
 					_patrolAreaMarker,
 					_markerDelete			
 				] call GMSAI_fnc_spawnVehiclePatrol;
+				[format["_spawnPatrolTypes: GMSAI_vehicle: _t = %1", _t]] call GMSAI_fnc_log;
 				_group = _t select 0;		
 			};
 			case GMSAI_ugv: {

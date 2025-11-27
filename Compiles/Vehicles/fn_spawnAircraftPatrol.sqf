@@ -67,7 +67,7 @@ try {
 	_group = _patrol select 0;
 	_aircraft = _patrol select 1;
 
-	[format["_spawnAircraftPatrol: _group %1 | _aircraft %2 | _pos %3 | getPosATL _aircraft %4", _group, _aircraft, _pos, getPosATL _aircraft]] call GMSAI_fnc_log; 
+	//[format["_spawnAircraftPatrol: _group %1 | _aircraft %2 | _pos %3 | getPosATL _aircraft %4", _group, _aircraft, _pos, getPosATL _aircraft]] call GMSAI_fnc_log; 
 	
 	if (isNull _group) throw -2;
 	if (isNull _aircraft) throw -1;

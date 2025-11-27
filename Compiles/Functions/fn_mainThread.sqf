@@ -17,10 +17,12 @@
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 
 
 /*  Spawn land and air patrols to initialize things */
+/*
 [] call GMSAI_fnc_monitorAirPatrols;
 [] call GMSAI_fnc_monitorUAVPatrols;
 [] call GMSAI_fnc_monitorVehiclePatrols;        
 [] call GMSAI_fnc_monitorUGVPatrols;   
+*/
 
 /* setup our timers */
 //private _1sec = diag_tickTime + 1;
@@ -36,7 +38,7 @@ while {true} do
     uiSleep 10;
     if (diag_tickTime > _10sec) then {
         [] call GMSAI_fnc_dynamicAIManager;
-        if (GMSAI_debug > 0) then {[] call GMSAI_fnc_monitorGroupDebugMarkers};        
+        //if (GMSAI_debug > 0) then {[] call GMSAI_fnc_monitorGroupDebugMarkers};        
         _10sec = diag_tickTime + 10;
     };
     if (diag_tickTime > _20sec) then

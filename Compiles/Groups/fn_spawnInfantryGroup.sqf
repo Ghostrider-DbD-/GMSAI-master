@@ -91,5 +91,5 @@ if !(_patrolMarker isEqualTo "") then // setup waypoints using the information s
 	] call GMSCore_fnc_initializeWaypointsAreaPatrol;
 };
 [_group,GMSAI_fnc_unitKilled] call GMSCore_fnc_addChainedMPKilled;
-[_group, GMSAI_BlacklistedLocations] call GMSCore_fnc_setGroupBlacklist;
+//[_group, GMSAI_BlacklistedLocations] call GMSCore_fnc_setGroupBlacklist;
 _group

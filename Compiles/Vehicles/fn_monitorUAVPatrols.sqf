@@ -79,17 +79,27 @@ for "_i" from 1 to (count GMSAI_UAVPatrols) do
 
 					if !(_pos isEqualTo [0,0]) then 
 					{
-					_newPatrol = [
+						/*
+						params[
+							"_difficulty",
+							"_className",				// classname of the drone to use
+							"_pos",					// Random position for patrols that roam the whole map 
+													// or center of the area to be patrolled for those that are restricted to a smaller region
+							["_patrolArea","Map"],  // "Map" will direct the chopper to patrol the entire map, "Region", a smaller portion of the map.
+							["_markerDelete",false]
+						];
+						*/
+						
+						_newPatrol = [
 							selectRandomWeighted _availDifficulties,
 							selectRandomWeighted _availAircraft,
 							_pos,
 							[] call GMSCore_fnc_getMapMarker,
-							_blacklistedAreas,					
-							300,
 							false
 						] call GMSAI_fnc_spawnUAVPatrol;
+						[format["_monitorUAVPatrols: _newPatrol = %1", _newPatrol]] call GMSAI_fnc_log;
 						_newPatrol params["_group","_aircraft"];
-						[format["spawned UAV patrol at %1 using aircraft %2 with _group = %3 and _aircraft = %4",_pos, typeOf _aircraft,_group,_aircraft]] call GMSAI_fnc_log;
+
 						if !(isNull _group || isNull _aircraft) then {
 							_uavPatrol set[1,_group];
 							_uavPatrol set[2,_aircraft];
@@ -99,7 +109,6 @@ for "_i" from 1 to (count GMSAI_UAVPatrols) do
 														// This list is monitored by _mainThread and empty or null groups are periodically removed.
 						} else {
 							// Something happened - try again later
-							[format["GMSAI_fnc_monitorUAVPatrols: _newPatrol spawned: group %1 : aircraft type %2", _group, typeOf (_newPatrol select 1)]] call GMSAI_fnc_log;
 							_uavPatrol set[5,diag_tickTime + ([_respawnTime] call GMSCore_fnc_getNumberFromRange)];
 							_uavPatrol set[3,-1];
 							if (isNull _group) then {
