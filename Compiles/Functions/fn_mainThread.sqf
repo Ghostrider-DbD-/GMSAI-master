@@ -27,25 +27,23 @@
 /* setup our timers */
 //private _1sec = diag_tickTime + 1;
 //private _5sec = diag_tickTime + 5;
-private _10sec = diag_tickTime + 10;
-private _20sec = diag_tickTime + 20;
-//private _60sec = diag_tickTime + 60;
+private _10sec = diag_tickTime;
+private _20sec = diag_tickTime;
+private _60sec = diag_tickTime;
 
 
 while {true} do
 {
-    [format["_mainThread: Start of main loop at %1",diag_tickTime]] call GMSAI_fnc_log;
+    //[format["_mainThread: Start of main loop at %1",diag_tickTime]] call GMSAI_fnc_log;
     uiSleep 10;
     if (diag_tickTime > _10sec) then {
         [] call GMSAI_fnc_dynamicAIManager;
-        //if (GMSAI_debug > 0) then {[] call GMSAI_fnc_monitorGroupDebugMarkers};        
+        [] call GMSAI_fnc_monitorStaticPatrolAreas;          
         _10sec = diag_tickTime + 10;
     };
-    if (diag_tickTime > _20sec) then
-    {
+    if (diag_tickTime > _60sec) then {
         //[] call GMSAI_fnc_monitorParatroopGroups;
-        _20sec = diag_tickTime + 20;
-        [] call GMSAI_fnc_monitorStaticPatrolAreas;  
+        _60sec = diag_tickTime +60;
         [] call GMSAI_fnc_monitorAirPatrols;
         [] call GMSAI_fnc_monitorUAVPatrols;
         [] call GMSAI_fnc_monitorVehiclePatrols;  

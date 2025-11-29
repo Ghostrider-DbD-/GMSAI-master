@@ -38,9 +38,7 @@ params[
 
 private _group = grpNull;
 private _vehicle = objNull;
-[format["_spawnVehiclePatrol: _classname %1 | _pos %2 | _patrolArea %3", _className, _pos, _patrolArea]] call GMSAI_fnc_log;
-
-uiSleep 1;
+//[format["_spawnVehiclePatrol: _classname %1 | _pos %2 | _patrolArea %3", _className, _pos, _patrolArea]] call GMSAI_fnc_log;
 
 try {
 
@@ -70,10 +68,9 @@ try {
 		[GMSAI_fnc_unitKilled],
 		GMSAI_chanceToGarisonBuilding
 	] call GMSCore_fnc_spawnInfantryGroup;
-	diag_log format["_spawnVehiclePatrol: _group %1 spawned",_group];
+	//diag_log format["_spawnVehiclePatrol: _group %1 spawned",_group];
 	
 	if (isNull _group) throw -2;
-
 
 /*
 params[
@@ -88,7 +85,7 @@ params[
 		["_vehKilledCode",[]]
 	];
 */
-	_vehicle = [
+	private _temp = [
 		_className,
 		_pos,		
 		_patrolArea,
@@ -100,19 +97,19 @@ params[
 		[GMSAI_fnc_vehicleHit],
 		[GMSAI_fnc_vehicleKilled]	   
 	] call GMSCore_fnc_spawnPatrolLand;  // this removes inventory, sets all key variables and adds event handlers	
-	diag_log format["_spawnVehiclePatrol: _vehicle %1 spawned",_vehicle];
-	
+	_group = _temp select 0;
+	_vehicle = _temp select 1; 
+	//diag_log format["_spawnVehiclePatrol: _vehicle %1 spawned",_vehicle];
 	if (isNull _vehicle) throw -1;
 
 	#define maxVehGunners 5 // These just force the script to fill all turrets before filling crew cargo seats
 	#define maxVehCrew 5 
 
 	diag_log format["GMSAI_fnc_spawnVehiclePatrol: _group %1 | _vehicle = %2 ", _group, _vehicle];
-	uiSleep 2;
 
 	//  params[["_group",grpNull], ["_veh", objNull],["_maxGunner",0],["_maxCargo", 0]];
 	[_group, _vehicle, maxVehGunners, maxVehCrew] call GMSCore_fnc_addVehicleCrew;
-	diag_log format["GMSAI_fnc_spawnVehiclePatrol: crew _vehicle = %1 ", crew _vehicle];
+	//diag_log format["GMSAI_fnc_spawnVehiclePatrol: crew _vehicle = %1 ", crew _vehicle];
 		
 	[_group, GMSAI_baseSkill] call GMSCore_fnc_setGroupBaseSkill;
 	[_group,GMSAI_unitDifficulty select _difficulty] call GMSCore_fnc_setupGroupSkills;
@@ -143,7 +140,6 @@ params[
 	[_vehicle,GMSAI_forbidenWeapons,GMSAI_forbidenMagazines] call GMSCore_fnc_disableVehicleWeapons;
 	[_vehicle,GMSAI_disabledSensors] call GMSCore_fnc_disableVehicleSensors;
 	if (GMSAI_disableInfrared) then {_vehicle disableTIEquipment true};
-
 }
 
 catch {

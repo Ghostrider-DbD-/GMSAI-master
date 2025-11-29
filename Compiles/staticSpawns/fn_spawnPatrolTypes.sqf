@@ -74,7 +74,7 @@ private _debugMarkers = [];
 
 				*/
 				private _vehType = selectRandomWeighted _types;
-				[format["_spanPatrolTypes-GMSAI_vehicle: _vehType %1 | _groupSpawnPos %2", _vehType, _groupSpawnPos]] call GMSAI_fnc_log;
+				//[format["_spanPatrolTypes-GMSAI_vehicle: _vehType %1 | _groupSpawnPos %2", _vehType, _groupSpawnPos]] call GMSAI_fnc_log;
 				private _t = [
 					_vehDiff,
 					_vehType,
@@ -82,24 +82,31 @@ private _debugMarkers = [];
 					_patrolAreaMarker,
 					_markerDelete			
 				] call GMSAI_fnc_spawnVehiclePatrol;
-				[format["_spawnPatrolTypes: GMSAI_vehicle: _t = %1", _t]] call GMSAI_fnc_log;
+				//[format["_spawnPatrolTypes: GMSAI_vehicle: _t = %1", _t]] call GMSAI_fnc_log;
 				_group = _t select 0;		
 			};
 			case GMSAI_ugv: {
 				//diag_log format["spawnPatrolTypes: case UGV"];
+				/*
+					["_difficulty",0],			// Difficulty (integer) of the AI in the UGV
+					["_className",""],		// ClassName of the UGV to spawn 
+					["_pos",[0,0,0]],					// Random position for patrols that roam the whole map 
+											// or center of the area to be patrolled for those that are restricted to a smaller region
+					["_patrolArea",GMSAI_patrolRoads],  // "Map" will direct the chopper to patrol the entire map, "Region", a smaller portion of the map.
+					["_markerDelete",false],
+					["_spawnOnRoad",true]
+				*/
 				if (_types isEqualTo []) then {_types = GMSAI_UGVtypes};
 				private _t = [
 					[_difficulty] call GMSCore_fnc_getIntegerFromRange,	
 					selectRandomWeighted _types,														
 					_groupSpawnPos,
 					_patrolAreaMarker,
-					[],
-					//300,					
 					_markerDelete,  // always use false: we will delete the marker(s) separately for these more complex patrols
 					true  // force spawning on roads
 				] call GMSAI_fnc_spawnUGVPatrol;
 				_group = _t select 0;
-				[format["GMSAI_fnc_spawnPatrolTypes: spawned UGV patrol with group %1 | count GMSAI_UGVGroups %2",_group, GMSAI_UGVGroups]] call GMSAI_fnc_log;
+				//[format["GMSAI_fnc_spawnPatrolTypes: spawned UGV patrol with group %1 | count GMSAI_UGVGroups %2",_group, GMSAI_UGVGroups]] call GMSAI_fnc_log;
 			};
 			case GMSAI_uav: {
 				diag_log format["spawnPatrolTypes: case UAV"];

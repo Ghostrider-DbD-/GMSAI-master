@@ -16,7 +16,7 @@ while {_pos isEqualTo []} do {
 	// Note that _pos is returned as an array of positions
 	//params[["_areaMarker",""],["_noPositionsToFind",0],["_testIsAllowed", true],["_allowWater", false]];
 	_pos = [_patrolMarker, _positionsToFind] call GMSCore_fnc_findRandomPosWithinArea;
-	[format["_findPositionAirPatrol: _pos = %1",_pos]] call GMSAI_fnc_log;
+	//[format["_findPositionAirPatrol: _pos = %1",_pos]] call GMSAI_fnc_log;
 	_pos = _pos select 0;
 	if !(_pos isEqualTo []) then {
 		private _playersNear = [_pos, 100] call GMSCore_fnc_nearestPlayers;

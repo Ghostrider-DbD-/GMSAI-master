@@ -111,14 +111,20 @@ for "_i" from 1 to (count GMSAI_UGVPatrols) do
 					_pos = [[] call GMSCore_fnc_getMapMarker, _blacklistedAreas] call GMSAI_fnc_findPositionLandPatrol; 
 
 					diag_log format["_monitorUGVPatrols(103): _pos = %1 for position of  anearby road",_pos];	
-					
+					/*
+						["_difficulty",0],			// Difficulty (integer) of the AI in the UGV
+						["_className",""],		// ClassName of the UGV to spawn 
+						["_pos",[0,0,0]],					// Random position for patrols that roam the whole map 
+												// or center of the area to be patrolled for those that are restricted to a smaller region
+						["_patrolArea",GMSAI_patrolRoads],  // "Map" will direct the chopper to patrol the entire map, "Region", a smaller portion of the map.
+						["_markerDelete",false],
+						["_spawnOnRoad",true]
+					*/
 					_newPatrol = [
 						(selectRandomWeighted _availDifficulties),
 						(selectRandomWeighted _availUGV), 
 						_pos,
 						[] call GMSCore_fnc_getMapMarker, // The marker for teh whole map 
-						_blacklistedAreas,
-						300,
 						false, // deleteMarker 
 						false // spawnOnRoads
 					] call GMSAI_fnc_spawnUGVPatrol;

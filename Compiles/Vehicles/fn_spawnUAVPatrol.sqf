@@ -47,7 +47,7 @@ try {
 		GMSAI_releaseVehiclesToPlayers,
 		GMSAI_vehicleDeleteTimer	
 	] call GMSCore_fnc_spawnPatrolUAV;	
-	
+
 	_group = _patrol select 0;
 	_aircraft = _patrol select 1;
 
@@ -85,5 +85,5 @@ catch
 		};
 	};
 }; 
-//[format["_spawnUAVPatrol:  GMSCore_fnc_spawnPatrolUAV returning _group %1 | _aircraft %2",_group, _aircraft]] call GMSAI_fnc_log;
+[format["_spawnUAVPatrol:  GMSCore_fnc_spawnPatrolUAV returning _group %1 | _aircraft %2",_group, _aircraft]] call GMSAI_fnc_log;
 [_group,_aircraft]
