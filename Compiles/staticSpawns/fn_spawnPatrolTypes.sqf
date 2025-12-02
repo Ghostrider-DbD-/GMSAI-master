@@ -48,7 +48,10 @@ private _debugMarkers = [];
 		switch (_groupType) do 
 		{
 			case GMSAI_infantry: {
-				//diag_log format["spawnPatrolTypes: case Infantry"];
+				diag_log format["spawnPatrolTypes: case Infantry"];
+				/*
+				
+				*/
 				_group = [
 					[_difficulty] call GMSCore_fnc_getIntegerFromRange,										
 					_groupSpawnPos,

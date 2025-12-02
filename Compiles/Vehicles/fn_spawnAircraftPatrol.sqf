@@ -82,6 +82,7 @@ try {
 	[_group, GMSAI_chanceParatroops] call GMSCore_fnc_setChanceParaDrop; 
 	[_group, GMSAI_chancePlayerDetected] call GMSCore_fnc_setChanceDetectedAir; 
 	[_group, GMSAI_paratroopCooldownTimer] call GMSCore_fnc_setParaInterval;
+	// TODO - add any event handlers or other things not hanled by SpawnAircraftPatrol by default
 }
 
 catch {
@@ -91,7 +92,7 @@ catch {
 		};
 
 		case -2: {
-			[format["_spawnAircraftPatrol: GMSCore_fnc_spawnInfantryGroup returned grpNull"],'warning'] call GMSAI_fnc_log;
+			[format["_spawnAircraftPatrol: grpNull"],'warning'] call GMSAI_fnc_log;
 		};
 
 		case -1: {

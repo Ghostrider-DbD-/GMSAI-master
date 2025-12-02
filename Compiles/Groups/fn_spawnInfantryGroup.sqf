@@ -27,12 +27,17 @@ params[
 		["_deleteMarker",true]  // when true the marker that defines borders of the patrol area will be deleted when the group is Null
 	];
 
+{
+	diag_log format["[GMSAI] _spawnInfantryGroup: _foreachIndex %1 = %2", _foreachIndex, _x];
+} foreach _this;
 /*
 
 params[
-		"_pos",  // center of the area in which to spawn units
-		"_units",  // Number of units to spawn
-		["_side",GMSCore_side],
+		["_pos",[0,0,0]],  // center of the area in which to spawn units
+		["_patrolAreaMarker",GMSCore_mapMarker],
+		["_markerDelete",false],	
+		["_units",0],  // Number of units to spawn
+		["_side",GMSCore_Side],
 		["_baseSkill",0.7],
 		["_alertDistance",500], 	 // How far GMS will search from the group leader for enemies to alert to the kiillers location
 		["_intelligence",0.5],  	// how much to bump knowsAbout after something happens
@@ -42,7 +47,10 @@ params[
 		["_removeNVG",true],
 		["_minDamageToHeal",0.4],
 		["_maxHeals",1],
-		["_smokeShell",""]
+		["_smokeShell",""],
+		["_aiHitCode",[]],
+		["_aiKilledCode",[]],
+		["_chanceGarison",0]
 	];
 
 */
@@ -51,6 +59,8 @@ params[
 
 private _group = [
 		_spawnPos,
+		_patrolMarker,
+		_deleteMarker, 		
 		[_units] call GMSCore_fnc_getIntegerFromRange,
 		GMSAI_side,
 		GMSAI_baseSkill,
@@ -77,19 +87,8 @@ _group setVariable[GMSAI_groupDifficulty,_difficulty];
 
 #define waypointTimeoutInfantryPatrols 180
 
-if !(_patrolMarker isEqualTo "") then // setup waypoints using the information stored in the marker 
-{
+[_group] call GMSCore_fnc_initializeInfantryPatrol;
 
-	[
-		_group,
-		GMSAI_BlacklistedLocations,
-		_patrolMarker,
-		waypointTimeoutInfantryPatrols,
-		GMSAI_chanceToGarisonBuilding,
-		"infantry",
-		_deletemarker
-	] call GMSCore_fnc_initializeWaypointsAreaPatrol;
-};
 [_group,GMSAI_fnc_unitKilled] call GMSCore_fnc_addChainedMPKilled;
 //[_group, GMSAI_BlacklistedLocations] call GMSCore_fnc_setGroupBlacklist;
 _group

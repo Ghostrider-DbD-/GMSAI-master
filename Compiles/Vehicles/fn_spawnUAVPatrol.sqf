@@ -75,7 +75,7 @@ catch
 		};
 
 		case -2: {
-			[format["_spawnUAVPatrol: GMSCore_fnc_spawnInfantryGroup returned grpNull"],'warning'] call GMSAI_fnc_log;
+			[format["_spawnUAVPatrol: grpNull"],'warning'] call GMSAI_fnc_log;
 		};
 
 		case -1: {

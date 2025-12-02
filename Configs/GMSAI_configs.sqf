@@ -106,10 +106,11 @@ GMSAI_CustomLocations = [
 	*/
 
 	// Example: Military area just north of Pyrgos 
+	/*
 	[
 		"Pyrgos Mil Base",
 		[[17439.6,13162.5,0.00155449],250,250,0,true],
-		[2,4],
+		[2,4],  // Units per group 
 		[GMSAI_difficultyBlue,0.75,GMSAI_difficultyRed,0.25,GMSAI_difficultyGreen,0.50,GMSAI_difficultyOrange,0.01],		// difficulty 
 		1.0,  //0.75,  // CHance 
 		-1,  // Respawns 
@@ -229,7 +230,26 @@ GMSAI_CustomLocations = [
 			]], 
 			[GMSAI_infantry,[1,2],[]]				
 		]
-	]			
+	],
+	[	// water patrol 
+		"Pyrgos Gulf", 
+		[[15352, 14127, 0], 1120, 993, 0, true],
+		[1,3], // Units per group 
+		[GMSAI_difficultyBlue,0.75,GMSAI_difficultyRed,0.25,GMSAI_difficultyGreen,0.50,GMSAI_difficultyOrange,0.01],		// difficulty 
+		0.50,  // CHance 
+		-1,  // Respawns 
+		[450,600], // respawn Timer 
+		120,  // despawn timer 
+		[
+			[GMSAI_air,[1,[]]],
+			[GMSAI_vehicle,[1],[
+				"_Boat_Armed_01_minigun_F",
+				"B_SDV_01_F"
+			]],
+			[GMSAI_infantry,[1],[]]
+		]
+	]	
+	*/	
 ];
 
 /*
@@ -440,7 +460,7 @@ GMSAI_skillOrange = [
 */
 
 GMSAI_skillbyDifficultyLevel = [GMSAI_skillBlue,GMSAI_skillRed,GMSAI_skillGreen,GMSAI_skillOrange];
-GMSAI_side = GMSCore_side;
+GMSAI_side = [] call GMSCore_fnc_getGMSside;
 //diag_log format["GMSAI_configs:  GMSAI_side = %1 | GMSCore_side = %2",GMSAI_side,GMSCore_side];
 /*********************************
 	 Messaging to Clients
@@ -552,7 +572,7 @@ GMSAI_aircraftTypes = [
 	//"B_Heli_Transport_03_unarmed_F",5
 ];
 
-GMSAI_numberOfUAVPatrols = 0;
+GMSAI_numberOfUAVPatrols = 1;
 GMSAI_UAVTypes = [  //  note that faction may matter here.
 	// East 
 	"O_UAV_01_F",2,  // Darter equivalent, unarmed
@@ -568,7 +588,7 @@ GMSAI_UAVPatrolresapwns = -1;
 GMSAI_UAVrespawntime = 300;
 //GMSAI_UAVdespawnTime = 120;
 
-GMSAI_numberOfUGVPatrols = 0;
+GMSAI_numberOfUGVPatrols = 1;
 GMSAI_UGVtypes = [  // 
 	// Stompers
 	"O_UGV_01_rcws_F",5 // east - Use for Exile  
@@ -580,7 +600,7 @@ GMSAI_UGVrespawnTime = [600,900];  // Min, Max
 GMSAI_UGVdespawnTime = 120;
 GMSAI_UGVPatrolRespawns = -1; 
 
-GMSAI_noVehiclePatrols = 0;
+GMSAI_noVehiclePatrols = 1;
 GMSAI_patroVehicleCrewCount = [3,5];
 GMSAI_vehiclePatroDifficulty = [GMSAI_difficultyBlue,0.60,GMSAI_difficultyRed,0.40,GMSAI_difficultyGreen,0.05,GMSAI_difficultyOrange,0.05];
 GMSAI_vehiclePatrolDeleteTime = 300;  //  Must be an INTEGER, not an array.
@@ -756,6 +776,7 @@ GMSAI_ChanceStaticVillageGroups = 0.80;
 GMSAI_staticCityGroups = false;  //  false to disable
 GMSAI_staticCityUnitsPerGroup = [2,4];
 GMSAI_staticCityPatrolTypes = [  //  for patrols beyond infantry
+	/*
 	[GMSAI_vehicle,[1,2],[
 		//"C_Offroad_01_F",3,
 		//"B_LSV_01_armed_F",2,
@@ -769,12 +790,13 @@ GMSAI_staticCityPatrolTypes = [  //  for patrols beyond infantry
 		//"CUP_C_Golf4_whiteblood_Civ",4,
 		//"CUP_C_Golf4_yellow_Civ",4,
 		//"CUP_C_Octavia_CIV",3		
-		/*
-		"B_MRAP_01_hmg_F",1,
-		"O_MRAP_02_hmg_F",1,
-		"I_MRAP_03_hmg_F",1			
-		*/
+		
+		//"B_MRAP_01_hmg_F",1,
+		//"O_MRAP_02_hmg_F",1,
+		//"I_MRAP_03_hmg_F",1			
+		
 	]],
+	*/
 	[GMSAI_air,[1],[]],	
 	[GMSAI_infantry,[2,3],[]]	
 ];
@@ -787,6 +809,14 @@ GMSAI_ChanceStaticCityGroups = 0.90;
 GMSAI_staticCapitalGroups = true;  //  false to disable
 GMSAI_staticCapitalUnitsPerGroup = [3,4];
 GMSAI_staticCapitalPatrolTypes = [  //  for patrols beyond infantry
+	/*
+
+	//[GMSAI_ugv,[1,2],[]],	
+	[GMSAI_uav,[1],[]],
+	
+	[GMSAI_air,[1],[]],
+	[GMSAI_infantry,[2,3],[]]  // Add one for every infantry group 	
+	*/
 	[GMSAI_vehicle,[1,3],[
 		//"B_G_Offroad_01_armed_F",3,
 		//"O_G_Offroad_01_armed_F",3,
@@ -794,20 +824,20 @@ GMSAI_staticCapitalPatrolTypes = [  //  for patrols beyond infantry
 		//"CUP_C_Golf4_whiteblood_Civ",4,
 		//"CUP_C_Golf4_yellow_Civ",4,
 		//"CUP_C_Octavia_CIV",3
-		/*		
-		"B_MRAP_01_gmg_F",1,
-		"O_MRAP_02_gmg_F", 1,
-		"I_MRAP_03_gmg_F",1,
-		"B_APC_Wheeled_01_cannon_F",0.5,
-		"I_APC_Wheeled_03_cannon_F",0.5
-		*/
+			
+		//"B_MRAP_01_gmg_F",1,
+		//"O_MRAP_02_gmg_F", 1,
+		//"I_MRAP_03_gmg_F",1,
+		//"B_APC_Wheeled_01_cannon_F",0.5,
+		//"I_APC_Wheeled_03_cannon_F",0.5
+		
 		"C_SUV_01_F",2,
 		"C_Hatchback_01_F",4		
-	]],
-	//[GMSAI_ugv,[1,2],[]],	
-	[GMSAI_uav,[1],[]],
+	]],	
+	[GMSAI_ugv,[1,2],[]],	
 	[GMSAI_air,[1],[]],
-	[GMSAI_infantry,[2,3],[]]  // Add one for every infantry group 	
+	[GMSAI_uav,[1],[]],
+	[GMSAI_infantry,[2,3],[]]  
 ];
 GMSAI_staticCapitalUnitsDifficulty = [GMSAI_difficultyBlue,0.10,GMSAI_difficultyRed,0.50,GMSAI_difficultyGreen,0.50,GMSAI_difficultyOrange,0.01];
 GMSAI_ChanceCapitalGroups = 0.90;

@@ -48,30 +48,6 @@ try {
 	private _vehCrewLimit = ([_className,true]  call BIS_fnc_crewCount);
 	private _crewCount = _calcCrewCount min _vehCrewLimit;
 
-	_group = [
-		_pos,// why not the location of the road
-			// Because this is used to spawn vehicles for small areas as well as larger ones such that some patrols will not travel much on roads.
-		[_crewCount] call GMSCore_fnc_getIntegerFromRange,
-			// We will add units later on
-		GMSCore_side,
-		GMSAI_baseSkill,
-		GMSA_alertDistanceByDifficulty select _difficulty,
-		GMSAI_intelligencebyDifficulty select _difficulty,
-		GMSAI_bodyDeleteTimer,
-		GMSAI_maxReloadsInfantry,
-		GMSAI_launcherCleanup,
-		GMSAI_removeNVG,
-		GMSAI_minDamageForSelfHeal,
-		GMSAI_maxHeals,
-		GMSAI_unitSmokeShell,
-		[GMSAI_fnc_unitHit],
-		[GMSAI_fnc_unitKilled],
-		GMSAI_chanceToGarisonBuilding
-	] call GMSCore_fnc_spawnInfantryGroup;
-	//diag_log format["_spawnVehiclePatrol: _group %1 spawned",_group];
-	
-	if (isNull _group) throw -2;
-
 /*
 params[
 		["_className",""], // Clasname of vehicle to be spawned
@@ -100,6 +76,8 @@ params[
 	_group = _temp select 0;
 	_vehicle = _temp select 1; 
 	//diag_log format["_spawnVehiclePatrol: _vehicle %1 spawned",_vehicle];
+	
+	if (isNull _group) throw -2;
 	if (isNull _vehicle) throw -1;
 
 	#define maxVehGunners 5 // These just force the script to fill all turrets before filling crew cargo seats
@@ -140,8 +118,9 @@ params[
 	[_vehicle,GMSAI_forbidenWeapons,GMSAI_forbidenMagazines] call GMSCore_fnc_disableVehicleWeapons;
 	[_vehicle,GMSAI_disabledSensors] call GMSCore_fnc_disableVehicleSensors;
 	if (GMSAI_disableInfrared) then {_vehicle disableTIEquipment true};
-}
+	// TODO - add any event handlers or other things not handled already 
 
+}
 catch {
 	switch (_exception) do {
 		case -3: {
