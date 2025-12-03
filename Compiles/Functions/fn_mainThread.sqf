@@ -67,5 +67,5 @@ while {true} do
             count GMSAI_UGVPatrolGroups
         ]] call GMSAI_fnc_log;
     };
-    [format["_mainThread: End of main loop at %1",diag_tickTime]] call GMSAI_fnc_log;    
+    //[format["_mainThread: End of main loop at %1",diag_tickTime]] call GMSAI_fnc_log;    
 };

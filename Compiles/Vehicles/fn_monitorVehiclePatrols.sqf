@@ -107,7 +107,7 @@ for "_i" from 1 to (count GMSAI_vehiclePatrols) do {
 					] call GMSAI_fnc_spawnVehiclePatrol;
 
 					_newPatrol params["_crewGroup","_vehicle"];
-					[format["spawned vehicle patrol at %1 using typeOf vehicle %2 -> vehicle %3 with group %4",_pos, typeOf _vehicle, _vehicle, _crewGroup]] call GMSAI_fnc_log;
+					//[format["spawned vehicle patrol at %1 using typeOf vehicle %2 -> vehicle %3 with group %4",_pos, typeOf _vehicle, _vehicle, _crewGroup]] call GMSAI_fnc_log;
 					
 					if (!isNull _crewGroup && !isNull _vehicle) then { 
 						_vehiclePatrol set[vehCrewGroup,_crewGroup];

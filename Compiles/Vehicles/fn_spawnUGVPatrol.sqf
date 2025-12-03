@@ -31,7 +31,7 @@ params[
 		["_spawnOnRoad",true]
 ];  	
 
-[format["_spawnUGVPatrol: _spawnonRoad %1 | _markerDelete %2 | _patrolArea %3 | _pos %4 | _className %5", _spawnonRoad, _markerDelete, _patrolArea, _pos, _className]] call GMSAI_fnc_log; 
+//[format["_spawnUGVPatrol: _spawnonRoad %1 | _markerDelete %2 | _patrolArea %3 | _pos %4 | _className %5", _spawnonRoad, _markerDelete, _patrolArea, _pos, _className]] call GMSAI_fnc_log; 
 
 private _group = grpNull;
 private _vehicle = objNull;
@@ -60,7 +60,7 @@ params[
 		_markerDelete,
 		_spawnOnRoad 
 	] call GMSCore_fnc_spawnPatrolUGV;
-	[format["_spawnUGVPatrol: _ugvData = %1", _ugvData]] call GMSAI_fnc_log;
+	//[format["_spawnUGVPatrol: _ugvData = %1", _ugvData]] call GMSAI_fnc_log;
 	_group = _ugvData select 0; 
 	_vehicle = _ugvData select 1;
 	
@@ -69,7 +69,7 @@ params[
 
 	[_group,GMSAI_unitDifficulty select _difficulty] call GMSCore_fnc_setupGroupSkills;
 
-	diag_log format["GMSAI_fnc_spawnUGVPatrol(109): _patrolArea = %1",_patrolArea];
+	//diag_log format["GMSAI_fnc_spawnUGVPatrol(109): _patrolArea = %1",_patrolArea];
 
 	if (_spawnOnRoad) then {
 		private _road = objNull;

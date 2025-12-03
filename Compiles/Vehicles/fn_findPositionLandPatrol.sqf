@@ -5,7 +5,7 @@
 params["_patrolMarker","_blacklist"];
 
 private _pos = [0,0,0];
-diag_log format["_findPositionLandPatrol: called with _patrolMarker %1 | _pos initialized as %2 | _blacklist = %3", _patrolMarker, _pos, _blacklist];
+//diag_log format["_findPositionLandPatrol: called with _patrolMarker %1 | _pos initialized as %2 | _blacklist = %3", _patrolMarker, _pos, _blacklist];
 
 while {_pos isEqualTo [0,0,0]} do {
 
@@ -18,13 +18,13 @@ while {_pos isEqualTo [0,0,0]} do {
 		while {_nearRoads isEqualTo []} do {
 			_radius = _radius + 100;
 			_nearRoads = _pos nearRoads _radius;
-			diag_log format["_findPositionLandPatrol: search for nearRoads with _pos %1 | _radius %2 | _pos nearRoads _radius returned %3",_pos, _radius, _nearRoads];
+			//diag_log format["_findPositionLandPatrol: search for nearRoads with _pos %1 | _radius %2 | _pos nearRoads _radius returned %3",_pos, _radius, _nearRoads];
 		};		
 		private _nextRoads = roadsConnectedTo (_nearRoads select 0);
 		private _roadInfo = getRoadInfo (_nextRoads select 0); 
 		_pos = ASLtoAGL (_roadInfo select 6);  // Position in ASL 
-		diag_log format["_findPositionLandPatrol: _nextRoads = %1", _nextRoads];
-		diag_log format["_findPositionLandPatrol: _roadInfo = %1", _roadInfo];		
+		//diag_log format["_findPositionLandPatrol: _nextRoads = %1", _nextRoads];
+		//diag_log format["_findPositionLandPatrol: _roadInfo = %1", _roadInfo];		
 		private _playersNear = [_pos, 100] call GMSCore_fnc_nearestPlayers;
 		if !(_playersNear isEqualTo []) then {
 			_pos = [0,0,0];
@@ -40,5 +40,5 @@ while {_pos isEqualTo [0,0,0]} do {
 		};
 	};
 };
-diag_log format["_findPositionLandPatrol: called with _patrolMarker %1 returning _pos = %2", _patrolMarker, _pos];
+//diag_log format["_findPositionLandPatrol: called with _patrolMarker %1 returning _pos = %2", _patrolMarker, _pos];
 _pos 

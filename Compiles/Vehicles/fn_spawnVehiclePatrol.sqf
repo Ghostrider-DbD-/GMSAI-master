@@ -83,7 +83,7 @@ params[
 	#define maxVehGunners 5 // These just force the script to fill all turrets before filling crew cargo seats
 	#define maxVehCrew 5 
 
-	diag_log format["GMSAI_fnc_spawnVehiclePatrol: _group %1 | _vehicle = %2 ", _group, _vehicle];
+	//diag_log format["GMSAI_fnc_spawnVehiclePatrol: _group %1 | _vehicle = %2 ", _group, _vehicle];
 
 	//  params[["_group",grpNull], ["_veh", objNull],["_maxGunner",0],["_maxCargo", 0]];
 	[_group, _vehicle, maxVehGunners, maxVehCrew] call GMSCore_fnc_addVehicleCrew;
