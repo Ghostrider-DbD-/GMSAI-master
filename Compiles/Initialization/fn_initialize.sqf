@@ -51,21 +51,31 @@ switch (toLowerANSI(GMSCore_modType)) do
 
 if (GMSAI_validateClassnames) then 
 {
+	#define remove true 
+	#define keep false 
 	if (GMSAI_debug > 0) then {[format["GMSAI_fnc_initialize: Checking classnames for %1",'GMSAI_paratroopAircraftTypes']] call GMSAI_fnc_log};
-	[GMSAI_paratroopAircraftTypes,true] call GMSCore_fnc_checkClassnamesArray;
-	[GMSAI_paratroopAircraftTypes,true] call GMSCore_fnc_checkClassNamePrices;
+	[GMSAI_paratroopAircraftTypes,remove] call GMSCore_fnc_checkClassnamesArray;
+	[GMSAI_paratroopAircraftTypes,keep] call GMSCore_fnc_checkClassNamePrices;
+
 	if (GMSAI_debug > 0) then {[format["GMSAI_fnc_initialize: Checking classnames for %1",'GMSAI_aircraftTypes']] call GMSAI_fnc_log};
-	[GMSAI_aircraftTypes,true] call GMSCore_fnc_checkClassnamesArray;
-	[GMSAI_aircraftTypes,true] call GMSCore_fnc_checkClassNamePrices;	
+	[GMSAI_aircraftTypes,remove] call GMSCore_fnc_checkClassnamesArray;
+	[GMSAI_aircraftTypes,keep] call GMSCore_fnc_checkClassNamePrices;
+	if (GMSAI_aircraftTypes isEqualTo []) then {GMSAI_numberOfAircraftPatrols = 0};
+
 	if (GMSAI_debug > 0) then {[format["GMSAI_fnc_initialize: Checking classnames for %1",'GMSAI_UAVTypes']] call GMSAI_fnc_log};
-	[GMSAI_UAVTypes,true] call GMSCore_fnc_checkClassnamesArray;
-	[GMSAI_UAVTypes,true] call GMSCore_fnc_checkClassNamePrices;	
+	[GMSAI_UAVTypes, remove] call GMSCore_fnc_checkClassnamesArray;
+	[GMSAI_UAVTypes, keep] call GMSCore_fnc_checkClassNamePrices;	
+	if (GMSAI_UAVTypes isEqualTo []) then {GMSAI_numberOfUAVPatrols = 0};
+	
 	if (GMSAI_debug > 0) then {[format["GMSAI_fnc_initialize: Checking classnames for %1",'GMSAI_UGVtypes']] call GMSAI_fnc_log};
-	[GMSAI_UGVtypes,true] call GMSCore_fnc_checkClassnamesArray;	
-	[GMSAI_UGVtypes,true] call GMSCore_fnc_checkClassNamePrices;	
+	[GMSAI_UGVtypes, remove] call GMSCore_fnc_checkClassnamesArray;	
+	[GMSAI_UGVtypes,keep] call GMSCore_fnc_checkClassNamePrices;	
+	if (GMSAI_UGVtypes isEqualTo []) then {GMSAI_numberOfUGVPatrols = 0};	
+	
 	if (GMSAI_debug > 0) then {[format["GMSAI_fnc_initialize: Checking classnames for %1",'GMSAI_patrolVehicles']] call GMSAI_fnc_log};
-	[GMSAI_patrolVehicles,true] call GMSCore_fnc_checkClassnamesArray;
-	[GMSAI_patrolVehicles,true] call GMSCore_fnc_checkClassNamePrices;		
+	[GMSAI_patrolVehicles, remove] call GMSCore_fnc_checkClassnamesArray;
+	[GMSAI_patrolVehicles, keep] call GMSCore_fnc_checkClassNamePrices;	
+	if (GMSAI_patrolVehicles isEqualTo []) then {GMSAI_noVehiclePatrols = 0};
 };
 
 /*
@@ -247,6 +257,13 @@ GMSAI_Initialized = true;
 [] call compileFinal preprocessFileLineNumbers "\x\addons\GMSAI\Configs\GMSAI_custom.sqf";
 [format[" Version %1 Build %2 Date %3 Initialized at %4",_version,_build,_buildDate,diag_tickTime]] call GMSAI_fnc_log;
 
+/*
+private _g = [];
+private _h = selectRandom _g;
+private _i = selectRandomWeighted _g;
+diag_log format["[GMSAI] selectRandom [] = %1", selectRandom _g];
+diag_log format["[GMSAI] selectRandomWeighted [] = %1", selectRandomWeighted _g];
+private _j = if (isNull _h) then {true} else {false};
 
 
 

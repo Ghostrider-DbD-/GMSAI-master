@@ -14,14 +14,17 @@
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 
+if (GMSAI_patrolVehicles isEqualTo []) exitWith 
+{
+	GMSAI_noVehiclePatrols = 0;
+	[format["GMSAI_patrolVehicles isEqualTo [] - Vehicle Patrols Disabled"]] call GMSAI_fnc_log;
+};
+
 if (GMSAI_noVehiclePatrols <= 0) exitWith 
 {
 	if (GMSAI_debug > 0) then {["GMSAI_noVehiclePatrols <= 0 - Vehicle Patrols Disabled"] call GMSAI_fnc_log};
 };
-if (GMSAI_patrolVehicles isEqualTo []) exitWith 
-{
-	[format["GMSAI_patrolVehicles isEqualTo [] - Vehicle Patrols Disabled"]]
-};
+
 #define lastSpawned -1 
 #define crewOnFoot grpNull
 for "_i" from 1 to GMSAI_noVehiclePatrols do
