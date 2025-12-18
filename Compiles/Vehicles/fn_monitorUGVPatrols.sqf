@@ -36,7 +36,7 @@ for "_i" from 1 to (count GMSAI_UGVPatrols) do
 	if (_i > (count GMSAI_UGVPatrols)) exitWith {};
 	private _UGVPatrol = GMSAI_UGVPatrols deleteAt 0;
 	_UGVPatrol params["_blacklistedAreas","_crewGroup","_UGV","_lastSpawned","_timesSpawned","_respawnAt","_respawnTime","_respawns","_availDifficulties","_availUGV"];  
-	
+	diag_log format["GMSAI _monotirUGVPatrols: _availUGF = %1", _availUGV];
 	private ["_crewCount","_countUnits","_addBack","_respawn"];
 	
 	try {

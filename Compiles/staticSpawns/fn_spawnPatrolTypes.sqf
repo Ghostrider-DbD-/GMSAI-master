@@ -26,14 +26,15 @@ params[
 	["_markerDelete",false]
 ];
 
+//private _vehicleTypes = +_types;
 private _spawnedGroups = [];
 private _debugMarkers = [];
+private "_group";
 //[format["GMSAI_fnc_spawnPatrolTypes: _markerDelete = %1",_markerDelete]] call GMSAI_fnc_log;
 {
 	_x params["_groupType","_groups","_types"];
 	//[format["GMSAI_fnc_spawnPatrolTypes: _groupType %1 | _groups %2 | _types %3",_groupType,_groups,_types]] call GMSAI_fnc_log;
-	private "_group";
-	
+
 	private _spawnOnWater = if (surfaceIsWater (markerPos _patrolAreaMarker)) then {true} else {false};
 	//params[["_areaMarker",""],["_noPositionsToFind",0],["_testIsAllowed", true],["_allowWater", false]];		
 	private _locations = [
@@ -49,9 +50,6 @@ private _debugMarkers = [];
 		{
 			case GMSAI_infantry: {
 				diag_log format["spawnPatrolTypes: case Infantry"];
-				/*
-				
-				*/
 				_group = [
 					[_difficulty] call GMSCore_fnc_getIntegerFromRange,										
 					_groupSpawnPos,
@@ -62,92 +60,85 @@ private _debugMarkers = [];
 				GMSAI_infantryGroups pushBack _group;
 			};
 			case GMSAI_vehicle: {
-				//diag_log format["spawnPatrolTypes: case vehicle: _difficulty = %1",_difficulty];
-				if (_types isEqualTo []) then {_types = GMSAI_patrolVehicles};
-				private _vehDiff = [_difficulty] call GMSCore_fnc_getIntegerFromRange;
-				/*
- 				params[
-					"_difficulty",
-					"_classname",			// className of vehicle to spawn
-					"_pos",					// Random position for patrols that roam the whole map 
-											// or center of the area to be patrolled for those that are restricted to a smaller region
-					["_patrolArea", [] call GMSCore_fnc_getMapMarker],  // "Map" will direct the vehicle to patrol the entire map, "Region", a smaller portion of the map.
-					["_markerDelete",false]
-				];  
-
-				*/
-				private _vehType = selectRandomWeighted _types;
-				//[format["_spanPatrolTypes-GMSAI_vehicle: _vehType %1 | _groupSpawnPos %2", _vehType, _groupSpawnPos]] call GMSAI_fnc_log;
-				private _t = [
-					_vehDiff,
-					_vehType,
-					_groupSpawnPos,
-					_patrolAreaMarker,
-					_markerDelete			
-				] call GMSAI_fnc_spawnVehiclePatrol;
-				//[format["_spawnPatrolTypes: GMSAI_vehicle: _t = %1", _t]] call GMSAI_fnc_log;
-				_group = _t select 0;		
+				diag_log format["spawnPatrolTypes: case vehicle"];
+				private _vehList = if (_types isEqualTo []) then {GMSAI_patrolVehicles} else {_types};
+				if !(_vehList isEqualTo []) then {
+				diag_log format["spawnPatrolTypes: _vehType selected = %1 | _ugv %2", _vehType];
+					_vehType = selectRandomWeighted _vehList;
+					private _vehDiff = [_difficulty] call GMSCore_fnc_getIntegerFromRange;
+					[format["_spanPatrolTypes-GMSAI_vehicle: _vehType %1 | _groupSpawnPos %2", _vehType, _groupSpawnPos]] call GMSAI_fnc_log;
+					private _t = [
+						_vehDiff,
+						_vehType,
+						_groupSpawnPos,
+						_patrolAreaMarker,
+						_markerDelete			
+					] call GMSAI_fnc_spawnVehiclePatrol;
+					//[format["_spawnPatrolTypes: GMSAI_vehicle: _t = %1", _t]] call GMSAI_fnc_log;
+					_group = _t select 0;
+				} else {
+					_group = grpNull;
+					[format["_spawnPatroTypes: GMSAI_patrolVehicles and the area-specific list of vehicles are both empty for area %1", _patrolAreaMarker]] call GMSAI_fnc_log;
+				};
 			};
 			case GMSAI_ugv: {
-				//diag_log format["spawnPatrolTypes: case UGV"];
-				/*
-					["_difficulty",0],			// Difficulty (integer) of the AI in the UGV
-					["_className",""],		// ClassName of the UGV to spawn 
-					["_pos",[0,0,0]],					// Random position for patrols that roam the whole map 
-											// or center of the area to be patrolled for those that are restricted to a smaller region
-					["_patrolArea",GMSAI_patrolRoads],  // "Map" will direct the chopper to patrol the entire map, "Region", a smaller portion of the map.
-					["_markerDelete",false],
-					["_spawnOnRoad",true]
-				*/
-				if (_types isEqualTo []) then {_types = GMSAI_UGVtypes};
-				private _t = [
-					[_difficulty] call GMSCore_fnc_getIntegerFromRange,	
-					selectRandomWeighted _types,														
-					_groupSpawnPos,
-					_patrolAreaMarker,
-					_markerDelete,  // always use false: we will delete the marker(s) separately for these more complex patrols
-					true  // force spawning on roads
-				] call GMSAI_fnc_spawnUGVPatrol;
-				_group = _t select 0;
-				//[format["GMSAI_fnc_spawnPatrolTypes: spawned UGV patrol with group %1 | count GMSAI_UGVGroups %2",_group, GMSAI_UGVGroups]] call GMSAI_fnc_log;
+				diag_log format["spawnPatrolTypes: case UGV"];
+				private _ugvList = if (_types isEqualTo []) then {GMSAI_UGVtypes} else {_types};
+				if !(_ugvList isEqualTo []) then {
+					private _ugv = selectRandomWeighted _ugvList;
+					private _t = [
+						[_difficulty] call GMSCore_fnc_getIntegerFromRange,	
+						_ugv,		
+						_groupSpawnPos,
+						_patrolAreaMarker,
+						_markerDelete,  // always use false: we will delete the marker(s) separately for these more complex patrols
+						true  // force spawning on roads
+					] call GMSAI_fnc_spawnUGVPatrol;
+					_group = _t select 0;
+				} else {
+					_group = grpNull;
+					[format["_spawnPatroTypes: GMSAI_UGVtypes and the area-specific list of vehicles are both empty  for area %1", _patrolAreaMarker]] call GMSAI_fnc_log;
+				};
 			};
 			case GMSAI_uav: {
 				diag_log format["spawnPatrolTypes: case UAV"];
-				if (_types isEqualTo []) then {_types = GMSAI_UAVTypes};
-				private _t = [
-					[_difficulty] call GMSCore_fnc_getIntegerFromRange,
-					selectRandomWeighted _types,
-					_groupSpawnPos,
-					_patrolAreaMarker,
-					//[],
-					300,
-					_markerDelete  // always use false: we will delete the marker(s) separately for these more complex patrols
-				] call GMSAI_fnc_spawnUAVPatrol;
-				_group = _t select 0;			
+				private _uavList = 	if (_types isEqualTo []) then {GMSAI_UAVTypes} else {_types};
+				if !(_uavList isEqualTo []) then {
+					private _uav = selectRandomWeighted _uavList;
+					private _t = [
+						[_difficulty] call GMSCore_fnc_getIntegerFromRange,
+						_uav,
+						_groupSpawnPos,
+						_patrolAreaMarker,
+						//[],
+						300,
+						_markerDelete  // always use false: we will delete the marker(s) separately for these more complex patrols
+					] call GMSAI_fnc_spawnUAVPatrol;
+					_group = _t select 0;		
+				} else { 
+					_group = grpNull;
+					[format["_spawnPatroTypes: No UAV Spawned-GMSAI_UAVTypes and the area-specific list of vehicles are both empty  for area %1", _patrolAreaMarker]] call GMSAI_fnc_log;
+				};
 			};
 			case GMSAI_air: {
-				//diag_log format["spawnPatrolTypes: case AIR: _difficulty = %1",_difficulty];
-				if (_types isEqualTo []) then {_types = GMSAI_aircraftTypes};
+				diag_log format["spawnPatrolTypes: case AIR"];
 				private _airDiff = [_difficulty] call GMSCore_fnc_getIntegerFromRange;
 				_pos = [_patrolAreaMarker, []] call GMSAI_fnc_findPositionAirPatrol;
-				/*
-					params[
-						["_difficulty",0],
-						["_className",""],			// className of the aircraft to spawn
-						["_pos",[0,0,0]],					// Random position for patrols that roam the whole map 
-												// or center of the area to be patrolled for those that are restricted to a smaller region
-						["_patrolArea","Map"],  // "Map" will direct the chopper to patrol the entire map, "Region", a smaller portion of the map.
-						["_markerDelete",false]
-					];				
-				*/
-				private _t = [
-					_airDiff,										
-					selectRandomWeighted _types,					
-					_pos,
-					_patrolAreaMarker,
-					_markerDelete  // always use false: we will delete the marker(s) separately for these more complex patrols
-				] call GMSAI_fnc_spawnAircraftPatrol;
-				_group = _t select 0;			
+				private _aircraftList = if (_types isEqualTo []) then {GMSAI_aircraftTypes} else {_types};
+				if !(_aircraftList isEqualTo []) then {
+					private _aircraft = selectRandomWeighted _aircraftList;
+					private _t = [
+						_airDiff,										
+						_aircraft,					
+						_pos,
+						_patrolAreaMarker,
+						_markerDelete  // always use false: we will delete the marker(s) separately for these more complex patrols
+					] call GMSAI_fnc_spawnAircraftPatrol;
+					_group = _t select 0;		
+				} else { 
+					_group = grpNull;
+					[format["_spawnPatroTypes:  No aircraft Spawned - GMSAI_aircraftTypes and the area-specific list of vehicles are both empty  for area %1", _patrolAreaMarker]] call GMSAI_fnc_log;					
+				};
 			};
 		};
 		//[format["_fnc_spawnPatrolTypes: _group spawned = %1",_group]] call GMSAI_fnc_log;
@@ -157,5 +148,5 @@ private _debugMarkers = [];
 		};
 	} forEach _locations;
 } forEach _types;
-//diag_log format["spawnPatrolTypes: _spawnedGroups %1 | _debugMarkers %2", _spawnedGroups,_debugMarkers];
+diag_log format["spawnPatrolTypes: _spawnedGroups %1 | _debugMarkers %2", _spawnedGroups,_debugMarkers];
 [_spawnedGroups,_debugMarkers]

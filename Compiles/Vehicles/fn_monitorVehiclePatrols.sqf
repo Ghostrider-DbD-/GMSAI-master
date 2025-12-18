@@ -94,7 +94,7 @@ for "_i" from 1 to (count GMSAI_vehiclePatrols) do {
 
 					_pos = [[] call GMSCore_fnc_getMapMarker, _blacklistedAreas] call GMSAI_fnc_findPositionLandPatrol; 
 
-					diag_log format["_monitorVehiclePatrols(103): _pos = %1 for position of  anearby road",_pos];	
+					//diag_log format["_monitorVehiclePatrols(103): _pos = %1 for position of  anearby road",_pos];	
 					private _newPatrol = [
 						[selectRandomWeighted _availDifficulties] call GMSCore_fnc_getIntegerFromRange,
 						selectRandomWeighted _availVehicles,

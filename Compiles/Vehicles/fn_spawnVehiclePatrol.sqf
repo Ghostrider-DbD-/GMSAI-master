@@ -38,7 +38,7 @@ params[
 
 private _group = grpNull;
 private _vehicle = objNull;
-//[format["_spawnVehiclePatrol: _classname %1 | _pos %2 | _patrolArea %3", _className, _pos, _patrolArea]] call GMSAI_fnc_log;
+[format["_spawnVehiclePatrol: _classname %1 | _pos %2 | _patrolArea %3", _className, _pos, _patrolArea]] call GMSAI_fnc_log;
 
 try {
 
@@ -61,11 +61,12 @@ params[
 		["_vehKilledCode",[]]
 	];
 */
+	
 	private _temp = [
 		_className,
 		_pos,		
 		_patrolArea,
-		//_group,
+		_markerDelete,
 		0.5,	// value for damage applied to vehicle - leave for now at 0
 		GMSA_removeFuel,
 		GMSAI_releaseVehiclesToPlayers, 

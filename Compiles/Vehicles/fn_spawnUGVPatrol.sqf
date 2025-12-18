@@ -31,7 +31,7 @@ params[
 		["_spawnOnRoad",true]
 ];  	
 
-//[format["_spawnUGVPatrol: _spawnonRoad %1 | _markerDelete %2 | _patrolArea %3 | _pos %4 | _className %5", _spawnonRoad, _markerDelete, _patrolArea, _pos, _className]] call GMSAI_fnc_log; 
+[format["_spawnUGVPatrol: _spawnonRoad %1 | _markerDelete %2 | _patrolArea %3 | _pos %4 | _className %5", _spawnonRoad, _markerDelete, _patrolArea, _pos, _className]] call GMSAI_fnc_log; 
 
 private _group = grpNull;
 private _vehicle = objNull;
