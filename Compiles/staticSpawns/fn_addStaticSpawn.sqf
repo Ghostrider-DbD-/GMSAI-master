@@ -12,7 +12,7 @@
 	Copyright 2020 Ghostrider-GRG-
 
 	Notes:
-		TODO: need to confirm the nature of the two parameters but I think the description of them is correct	
+	
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 

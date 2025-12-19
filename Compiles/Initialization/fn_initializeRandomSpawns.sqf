@@ -10,7 +10,7 @@
 	Copyright 2020 Ghostrider-GRG-
 
 	Notes:
-		TODO: confirm the meaning of _locations here 
+
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 

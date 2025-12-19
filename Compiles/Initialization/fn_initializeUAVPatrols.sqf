@@ -10,7 +10,7 @@
 	Copyright 2020 Ghostrider-GRG-
 
 	Notes:
-		TODO: need to think about area-based varients of this function.
+
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 

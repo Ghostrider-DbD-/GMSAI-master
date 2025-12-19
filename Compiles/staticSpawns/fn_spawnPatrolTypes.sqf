@@ -13,7 +13,6 @@
 		Need to add code to track respawns here.
 
 	TODO: Does not yet handle shps or submersibles
-	TODO: Take out any uiSleeps when this is sorted
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp"

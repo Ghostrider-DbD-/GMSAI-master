@@ -1,4 +1,10 @@
 /*
+    GMSAI_fnc_initializeBlacklistedAreas
+
+    Purpose: initialize any blacklisted areas in GMSAI_configs 
+    Params: None
+    Returns: None
+    Note: blacklisted areas should be formated as follows
     //  [[_pos, _sizeA, _sizeB], _name] where name is the name to be assigned to the location
 */
 

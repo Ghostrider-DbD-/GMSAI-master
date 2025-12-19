@@ -10,7 +10,7 @@
 	Copyright 2020 Ghostrider-GRG-
 
 	Notes: 
-		TODO: think about area-based versions of this script
+
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 

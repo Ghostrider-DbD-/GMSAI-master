@@ -26,6 +26,7 @@ params["_dropPos","_group",["_target",ObjNull]];
 
 	TODO: test if this is used.
 	TODO: Add 'gunship' option that specifies that the heli will patrol the area and try to take out any players spotted.
+	// TODO: update parameter list for call to GMSCore_fnc_spawnPatrolAircraft
 */
 
 // make sure no other reinforcements are called in for a while

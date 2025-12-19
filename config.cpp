@@ -11,8 +11,8 @@
 */
 class GMSAI_Build {
 	version = "1.12";
-	build = "52";
-	buildDate = "12-02-25";
+	build = "57";
+	buildDate = "12-18-25";
 };
 class CfgPatches {
 	class GMSAI {
@@ -64,7 +64,8 @@ class CfgFunctions {
 			// Initialization of static spawn points is handled by these functions
 			file = "\x\addons\GMSAI\Compiles\Initialization";
 			class initialize {};
-			class initializeAircraftPatrols {};			
+			class initializeAircraftPatrols {};	
+			class initializeBlacklistedAreas {};		
 			class initializeCustomSpawns {};
 			class initializeRandomSpawns {};
 			class initializeSafeZones {};							
@@ -72,7 +73,7 @@ class CfgFunctions {
 			class initializeUAVPatrols {};		
 			class initializeUGVPatrols {};	
 			class initializeVehiclePatrols {};
-			class validateConfigs {};
+			//class validateConfigs {};
 		};	
 		class Players {
 			// Things that GMSAI does to players.

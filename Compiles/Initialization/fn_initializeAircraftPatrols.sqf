@@ -10,7 +10,7 @@
 	Copyright 2020 Ghostrider-GRG-
 
 	Notes:
-		TODO: think about how to add also the patrols that are user defined
+
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 

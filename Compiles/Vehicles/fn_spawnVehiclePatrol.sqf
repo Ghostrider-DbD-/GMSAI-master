@@ -21,8 +21,6 @@
 		Locations: are any town, city etc defined at startup.
 		when '_isSubmersible == true the script will assume it should set swimInDepth as well
 		Locations: are any town, city etc defined at startup. 
-
-	TODO: Take out any uiSleep when this is sorted
  
 */
 
@@ -119,7 +117,6 @@ params[
 	[_vehicle,GMSAI_forbidenWeapons,GMSAI_forbidenMagazines] call GMSCore_fnc_disableVehicleWeapons;
 	[_vehicle,GMSAI_disabledSensors] call GMSCore_fnc_disableVehicleSensors;
 	if (GMSAI_disableInfrared) then {_vehicle disableTIEquipment true};
-	// TODO - add any event handlers or other things not handled already 
 
 }
 catch {

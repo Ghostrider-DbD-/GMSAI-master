@@ -106,8 +106,9 @@ GMSAI_CustomLocations = [
 	*/
 
 	// Example: Military area just north of Pyrgos 
+	
 	/*
-	[
+	[	
 		"Pyrgos Mil Base",
 		[[17439.6,13162.5,0.00155449],250,250,0,true],
 		[2,4],  // Units per group 
@@ -117,27 +118,31 @@ GMSAI_CustomLocations = [
 		[30, 60], //[400,600], // respawn Timer 
 		30, //120,  // despawn timer 
 		[
-			//[GMSAI_ugv,[1],[]],	  // if you want to specify which UGV to spawn add the classNames in a weighted array 
-			//[GMSAI_uav,[1],[]],   // if you want to specify which UAV to spawn add the classNames in a weighted array 
-			//[GMSAI_air,[1],[]],	   // if you want to specify which aircraft to spawn add the classNames in a weighted array 
+			[GMSAI_ugv,[1],[]],	  // if you want to specify which UGV to spawn add the classNames in a weighted array 
+			[GMSAI_uav,[1],[]],   // if you want to specify which UAV to spawn add the classNames in a weighted array 
+			[GMSAI_air,[1],[]],	   // if you want to specify which aircraft to spawn add the classNames in a weighted array 
+			
 			[GMSAI_vehicle,[1],[
-			//"CUP_C_Golf4_white_Civ",4,
+				//"CUP_C_Golf4_white_Civ",4,
 				//"CUP_C_Golf4_whiteblood_Civ",4,
 				//"CUP_C_Golf4_yellow_Civ",4,
 				//"CUP_C_Octavia_CIV",3
 
 				"C_Offroad_01_F",3,
-				"B_LSV_01_armed_F",2,
+				////"B_LSV_01_armed_F",2,
 				"C_SUV_01_F",2,
-				"I_C_Offroad_02_LMG_F",2,
+				////"I_C_Offroad_02_LMG_F",2,
 				//"B_T_LSV_01_armed_black_F",2,
 				//"B_T_LSV_01_armed_olive_F",2,
 				//"B_T_LSV_01_armed_sand_F",2	
 				"C_Hatchback_01_F",4	
 			]], 
+			
 			[GMSAI_infantry,[1,2],[]]				
 		]
-	],
+	]
+	*/
+	/*,
 	[
 		"Factory",
 		[[12609.4,16417.7,0.0014534],250,250,0,true],
@@ -231,9 +236,11 @@ GMSAI_CustomLocations = [
 			[GMSAI_infantry,[1,2],[]]				
 		]
 	],
+	*/
+	/*
 	[	// water patrol 
 		"Pyrgos Gulf", 
-		[[15352, 14127, 0], 1120, 993, 0, true],
+		[[15352, 14127, 0], 300, 300, 0, true],
 		[1,3], // Units per group 
 		[GMSAI_difficultyBlue,0.75,GMSAI_difficultyRed,0.25,GMSAI_difficultyGreen,0.50,GMSAI_difficultyOrange,0.01],		// difficulty 
 		0.50,  // CHance 
@@ -241,7 +248,7 @@ GMSAI_CustomLocations = [
 		[450,600], // respawn Timer 
 		120,  // despawn timer 
 		[
-			[GMSAI_air,[1,[]]],
+			[GMSAI_air,[1],[]],
 			[GMSAI_vehicle,[1],[
 				"_Boat_Armed_01_minigun_F",
 				"B_SDV_01_F"
@@ -249,32 +256,34 @@ GMSAI_CustomLocations = [
 			[GMSAI_infantry,[1],[]]
 		]
 	]	
-	*/	
+	*/
 ];
 
 /*
 	GMSAI will try NOT to spawn any assets within these areas
 */
+// TODO: Update how these are handled through call to GMSCore
 GMSAI_BlacklistedLocations = [
 	// These can include location names, markers or arrays formated as [center, a, b, angle, isRectangle]  
 	// Some examples are listed below
 	// Positions for Exile.Altis Mil server 
-
+    // Note: blacklisted areas should be formated as follows
+    //  [[_pos, _sizeA, _sizeB], _name] where name is the name to be assigned to the location
 	/*
-	[[11633,11950,0],500,500,0,true],  // TraderCity_SW_Airfield
-	[[14645,16771,0],500,500,0,true], // Trader 
-	[[20824,7255,0],500,500,0,true],  // Trader 
-	[[9189,21651,0],500,500,0,true],  // Trader 
-	[[24147,16143,0],500,500,0,true], // Trader  
-	[[2998,18175,0],500,500,0,true],  // Trader 
-	[[23334,24188,0],500,500,0,true],
-	[[14281.2,13469.3,0],250,250,0,true],  // tiny island
-	[[15420.8,16223.6,-9.61744],500,250,0,true],  // Power plant - it overlaps with the main trader
-	[[15137.2,17297.8,0],400,200,0,true],  // south end main airport - location of the virtual hangers
-	[[13471.9,12018.5,0],400,250,0,true],  // Player Spawns on Island
-	[[15139,14299,0],300,300,0,true]
+	[[[11633,11950,0],500,500],"TraderCitySW"],  // TraderCity_SW_Airfield
+	[[[14645,16771,0],500,500], TraderCity2"], // Trader 
+	[[[20824,7255,0],500,500], "TraderCity3"],  // Trader 
+	[[[9189,21651,0],500,500], "TraderCity4"],  // Trader 
+	[[[24147,16143,0],500,500, "TraderCity5"], // Trader  
+	[[[2998,18175,0],500,500], "TraderCity6"],  // Trader 
+	//[[[23334,24188,0],500,500,0,true],
+	[[[14281.2,13469.3,0],250,250], "TinyIsland"],  // tiny island
+	[[[15420.8,16223.6,-9.61744],500,250], "LargePowerPlant"],  // Power plant - it overlaps with the main trader
+	[[[15137.2,17297.8,0],400,200], "MainAirportSW"],  // south end main airport - location of the virtual hangers
+	[[[13471.9,12018.5,0],400,250], "ExileRespawnBunker"],  // Player Spawns on Island
+	////[[15139,14299,0],300,300,0,true]
 	*/
-	[[166733, 13604, 0], 200, 0200, 0, true]  // Chelonosi on Altis which does bad things to roaming vehicles
+	[[[166733, 13604, 0], 200, 200], "ChelonosiIsland"]  // Chelonosi on Altis which does bad things to roaming vehicles
 ];
 
 /* 
@@ -545,6 +554,7 @@ GMSAI_aircraftGunners = 3;
 GMSAI_airpatrolResapwns = -1;
 // treat aircraft types as weighted arrayIntersect
 GMSAI_aircraftTypes = [
+	/*
 	#ifdef isEpoch
 	"a2_mi8_EPOCH",3,
 	"uh1h_Epoch",3,
@@ -555,29 +565,29 @@ GMSAI_aircraftTypes = [
 	"a2_ch47f_armed_EPOCH",1,
 	"a2_ch47f_armed_plus_EPOCH",1,
 	#endif 
-
+	*/
 	//"CUP_B_AW159_HIL",1,
 	//"CUP_B_412_Mil_Transport_HIL",1,
 	//"CUP_B_MH6J_OBS_USA",1,
 	//"CUP_B_UH1Y_UNA_USMC",1,
 
 	//"B_Heli_Transport_01_F",5,
-	"B_Heli_Light_01_F",1,
+	///"B_Heli_Light_01_F",1,
 	//"I_Heli_light_03_unarmed_F",5,
 	//"B_Heli_Transport_03_unarmed_green_F",5,
-	"I_Heli_light_03_F",1,
+	///"I_Heli_light_03_F",1,
 	//"I_Plane_Fighter_03_AA_F",1
-	"O_Heli_Light_02_F",2
+	///"O_Heli_Light_02_F",2
 	//"B_Heli_Attack_01_F",2,
-	//"B_Heli_Transport_03_unarmed_F",5
+	"B_Heli_Transport_03_unarmed_F",5
 ];
 
 GMSAI_numberOfUAVPatrols = 1;
 GMSAI_UAVTypes = [  //  note that faction may matter here.
 	// East 
-	"O_UAV_01_F",2,  // Darter equivalent, unarmed
+	//"O_UAV_01_F",2,  // Darter equivalent, unarmed
 	//"O_UAV_02_F",2, // Ababil with Scalpel Missels
-	"O_UAV_02_CAS_F",2  // Ababil with Bombx
+	//"O_UAV_02_CAS_F",2  // Ababil with Bombx
 	//"O_UAV_01_F",2
 	// West - see CfgVehicles WEST online or in the editor
 	// Independent/GUER
@@ -591,7 +601,7 @@ GMSAI_UAVrespawntime = 300;
 GMSAI_numberOfUGVPatrols = 1;
 GMSAI_UGVtypes = [  // 
 	// Stompers
-	"O_UGV_01_rcws_F",5 // east - Use for Exile  
+	//"O_UGV_01_rcws_F",5 // east - Use for Exile  
 	//"B_UGV_01_rcws_F",5 // west 
 	//"I_UGV_01_rcws_F",5 // GUER
 ];
@@ -608,6 +618,7 @@ GMSAI_vehiclePatrolRespawnTime = [300,600];
 GMSAI_vehiclePatrolRespawns = -1;
 GMSAI_patrolVehicles = [  // Weighted array of vehicles spawned to patrol roads and cities.
 
+	/*
 	#ifdef isEpoch
 	//"MBK_01_EPOCH",3,
 	"A2_Golf_EPOCH",4,
@@ -623,6 +634,7 @@ GMSAI_patrolVehicles = [  // Weighted array of vehicles spawned to patrol roads 
 	//"A2_Vodnik_EPOCH",1,
 	"A2_Volha_EPOCH",4
 	#endif 
+	*/
 	/*
 
 		END Testing Block
@@ -682,14 +694,14 @@ GMSAI_patrolVehicles = [  // Weighted array of vehicles spawned to patrol roads 
 	//"CUP_B_UAZ_Unarmed_CDF",3,
 	//"CUP_B_Ural_Empty_CDF",2
 
-	"C_Offroad_01_F",3,
-	"B_LSV_01_armed_F",2,
-	"C_SUV_01_F",2,
-	"I_C_Offroad_02_LMG_F",2,
+	////"C_Offroad_01_F",3,
+	//"B_LSV_01_armed_F",2,
+	////"C_SUV_01_F",2,
+	//"I_C_Offroad_02_LMG_F",2,
 	//"B_T_LSV_01_armed_black_F",2,
 	//"B_T_LSV_01_armed_olive_F",2,
 	//"B_T_LSV_01_armed_sand_F",2	
-	"C_Hatchback_01_F",4
+	////"C_Hatchback_01_F",4
 	
 ];
 
@@ -727,7 +739,7 @@ GMSAI_patrolTypesToNotifyLastUnit = ["Air","Car","Tank","StaticWeaon","Ship","Ma
 
 GMSAI_bodyDeleteTimer =10 * 60;
 
-GMSAI_useDynamicSpawns = false;
+GMSAI_useDynamicSpawns = true;
 GMSAI_maxLoiterTime = 900;  // 300 - time before a player is considered camping out.
 GMSAI_maxActiveDynamicSpawns = 10;  // Max players that have a dynamic spawn targeting them.
 GMSAI_maximumDynamicRespawns = -1;  //  Set to 0 to spawn only once. Set to -1 to have infinite respawns (default).
@@ -806,7 +818,7 @@ GMSAI_ChanceStaticCityGroups = 0.90;
 /*
 	SETTINGS FOR CAPITAL CITIES
 */
-GMSAI_staticCapitalGroups = true;  //  false to disable
+GMSAI_staticCapitalGroups = false;  //  false to disable
 GMSAI_staticCapitalUnitsPerGroup = [3,4];
 GMSAI_staticCapitalPatrolTypes = [  //  for patrols beyond infantry
 	/*
@@ -831,12 +843,12 @@ GMSAI_staticCapitalPatrolTypes = [  //  for patrols beyond infantry
 		//"B_APC_Wheeled_01_cannon_F",0.5,
 		//"I_APC_Wheeled_03_cannon_F",0.5
 		
-		"C_SUV_01_F",2,
-		"C_Hatchback_01_F",4		
+		//"C_SUV_01_F",2,
+		//"C_Hatchback_01_F",4		
 	]],	
-	[GMSAI_ugv,[1,2],[]],	
-	[GMSAI_air,[1],[]],
-	[GMSAI_uav,[1],[]],
+	//[GMSAI_ugv,[1,2],[]],	
+	//[GMSAI_air,[1],[]],
+	//[GMSAI_uav,[1],[]],
 	[GMSAI_infantry,[2,3],[]]  
 ];
 GMSAI_staticCapitalUnitsDifficulty = [GMSAI_difficultyBlue,0.10,GMSAI_difficultyRed,0.50,GMSAI_difficultyGreen,0.50,GMSAI_difficultyOrange,0.01];

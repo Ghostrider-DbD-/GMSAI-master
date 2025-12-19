@@ -13,6 +13,7 @@
 
 	Notes:
 		TODO: need to confirm the nature of the two parameters but I think the description of them is correct	
+		TODO: Is this used?
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 

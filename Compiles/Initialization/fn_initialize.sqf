@@ -237,8 +237,6 @@ GMSAI_staticRandomSettings = [GMSAI_staticrandomunitsPerGroup,GMSAI_staticRandom
 GMSAI_dynamicSettings = [GMSAI_dynamicRandomGroups,GMSAI_dynamicRandomUnits,GMSAI_dynamicUnitsDifficulty,GMSAI_dynamicRandomChance,GMSAI_staticRespawns, GMSAI_staticRespawnTime, GMSAI_staticDespawnTime,GMSAI_infantry];
 GMSAI_paratroopSettings = [GMSAI_numberParatroops,GMSAI_paratroopDifficulty,GMSAI_chanceParatroops,0,GMSAI_paratroopCooldownTimer,GMSAI_paratroopDespawnTimer,GMSAI_infantry];
 
-
-// TODO: Sort out adding blacklisted areas 
 [] call GMSAI_fnc_initializeBlacklistedAreas;
 [] call GMSAI_fnc_initializeStaticSpawnsForLocations;
 [] call GMSAI_fnc_initializeRandomSpawns;

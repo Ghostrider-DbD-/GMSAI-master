@@ -10,7 +10,7 @@
 	Copyright 2020 Ghostrider-GRG-
 
 	Notes: 
-		TODO: think about area-based functions for UGVs
+
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 
