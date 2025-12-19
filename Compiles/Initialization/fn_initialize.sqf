@@ -238,7 +238,8 @@ GMSAI_dynamicSettings = [GMSAI_dynamicRandomGroups,GMSAI_dynamicRandomUnits,GMSA
 GMSAI_paratroopSettings = [GMSAI_numberParatroops,GMSAI_paratroopDifficulty,GMSAI_chanceParatroops,0,GMSAI_paratroopCooldownTimer,GMSAI_paratroopDespawnTimer,GMSAI_infantry];
 
 
-//diag_log format["[GMSAI] Initializing Static and Vehicle Spawns at %1",diag_tickTime];
+// TODO: Sort out adding blacklisted areas 
+[] call GMSAI_fnc_initializeBlacklistedAreas;
 [] call GMSAI_fnc_initializeStaticSpawnsForLocations;
 [] call GMSAI_fnc_initializeRandomSpawns;
 [] call GMSAI_fnc_initializeAircraftPatrols;
