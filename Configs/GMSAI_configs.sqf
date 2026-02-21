@@ -5,9 +5,6 @@
 */
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 
 
-// With debug = 1, additional debuggin information is logged or displayed on screen
-GMSAI_debug = 2;  // 0, no debugging, 1 most debug logging, 2 all debug logging
-
 // Use this to check that classnames are valid and match intended category for the various vehicle types used
 GMSAI_validateClassnames = true;  
 GMSAI_updateInterval = 120;  // update status of everything at this interval in seconds 
@@ -340,7 +337,6 @@ GMSAI_chanceOpticsSecondary = 0.4; // the chance optics will be attached to a un
 GMSAI_chancePointerSecondary = 0.4; 
 GMSAI_chanceMuzzleSecondary = 0.4;
 
-//#define isEpoch 
 GMSAI_blacklistedSecondary = [
 	#ifdef isEpoch 
 	"nl_auto_xbow",
@@ -546,7 +542,7 @@ GMSAI_paratroopAircraftTypes = [  // Note: this is a weighted array of vehicles 
 	Aircraft Patrol Spawn Configs
 *********************************/
 // TODO: aircraft could be spread out more on the map.
-GMSAI_numberOfAircraftPatrols = 1;
+GMSAI_numberOfAircraftPatrols = 5;
 GMSAI_aircraftPatrolDifficulty =  [GMSAI_difficultyBlue,0.90,GMSAI_difficultyRed,0.10];
 GMSAI_aircraftRespawnTime = 600;  //[600,900];  //  Min, Max respawn time
 GMSAI_aircraftDesapwnTime = 120;
@@ -573,8 +569,8 @@ GMSAI_aircraftTypes = [
 
 	//"B_Heli_Transport_01_F",5,
 	///"B_Heli_Light_01_F",1,
-	//"I_Heli_light_03_unarmed_F",5,
-	//"B_Heli_Transport_03_unarmed_green_F",5,
+	"I_Heli_light_03_unarmed_F",5,
+	"B_Heli_Transport_03_unarmed_green_F",5,
 	///"I_Heli_light_03_F",1,
 	//"I_Plane_Fighter_03_AA_F",1
 	///"O_Heli_Light_02_F",2
@@ -582,7 +578,7 @@ GMSAI_aircraftTypes = [
 	"B_Heli_Transport_03_unarmed_F",5
 ];
 
-GMSAI_numberOfUAVPatrols = 1;
+GMSAI_numberOfUAVPatrols = 3;
 GMSAI_UAVTypes = [  //  note that faction may matter here.
 	// East 
 	//"O_UAV_01_F",2,  // Darter equivalent, unarmed
@@ -591,26 +587,26 @@ GMSAI_UAVTypes = [  //  note that faction may matter here.
 	//"O_UAV_01_F",2
 	// West - see CfgVehicles WEST online or in the editor
 	// Independent/GUER
-	//"I_UAV_01_F",1
+	"I_UAV_01_F",1
 ];
 GMSAI_UAVDifficulty = [GMSAI_difficultyBlue,0.40,GMSAI_difficultyRed,0.40,GMSAI_difficultyGreen,0.15,GMSAI_difficultyOrange,0.05];
 GMSAI_UAVPatrolresapwns = -1;
 GMSAI_UAVrespawntime = 300;
 //GMSAI_UAVdespawnTime = 120;
 
-GMSAI_numberOfUGVPatrols = 1;
+GMSAI_numberOfUGVPatrols = 3;
 GMSAI_UGVtypes = [  // 
 	// Stompers
 	//"O_UGV_01_rcws_F",5 // east - Use for Exile  
 	//"B_UGV_01_rcws_F",5 // west 
-	//"I_UGV_01_rcws_F",5 // GUER
+	"I_UGV_01_rcws_F",5 // GUER
 ];
 GMSAI_UGVdifficulty = [GMSAI_difficultyBlue,0.60,GMSAI_difficultyRed,0.40,GMSAI_difficultyGreen,0.05,GMSAI_difficultyOrange,0.05];
 GMSAI_UGVrespawnTime = [600,900];  // Min, Max
 GMSAI_UGVdespawnTime = 120;
 GMSAI_UGVPatrolRespawns = -1; 
 
-GMSAI_noVehiclePatrols = 1;
+GMSAI_noVehiclePatrols = 10;
 GMSAI_patroVehicleCrewCount = [3,5];
 GMSAI_vehiclePatroDifficulty = [GMSAI_difficultyBlue,0.60,GMSAI_difficultyRed,0.40,GMSAI_difficultyGreen,0.05,GMSAI_difficultyOrange,0.05];
 GMSAI_vehiclePatrolDeleteTime = 300;  //  Must be an INTEGER, not an array.
@@ -694,14 +690,14 @@ GMSAI_patrolVehicles = [  // Weighted array of vehicles spawned to patrol roads 
 	//"CUP_B_UAZ_Unarmed_CDF",3,
 	//"CUP_B_Ural_Empty_CDF",2
 
-	////"C_Offroad_01_F",3,
+	"C_Offroad_01_F",3,
 	//"B_LSV_01_armed_F",2,
-	////"C_SUV_01_F",2,
+	"C_SUV_01_F",2,
 	//"I_C_Offroad_02_LMG_F",2,
 	//"B_T_LSV_01_armed_black_F",2,
 	//"B_T_LSV_01_armed_olive_F",2,
 	//"B_T_LSV_01_armed_sand_F",2	
-	////"C_Hatchback_01_F",4
+	"C_Hatchback_01_F",4
 	
 ];
 

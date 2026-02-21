@@ -18,7 +18,7 @@
 	
 */
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 
-[format[" _monitorAirPatrols called at %1 for %2 ACTIVE Air Patrols",diag_tickTime, count GMSAI_airPatrols]] call GMSAI_fnc_log;
+//[format[" _monitorAirPatrols called at %1 for %2 ACTIVE Air Patrols",diag_tickTime, count GMSAI_airPatrols]] call GMSAI_fnc_log;
 
 if (GMSAI_monitorVehiclePatrolsActive) exitWith {};
 GMSAI_monitorAircraftPatrolsActive = true; 
@@ -103,13 +103,14 @@ for "_i" from 1 to (count GMSAI_airPatrols) do
 						] call GMSAI_fnc_spawnAircraftPatrol;
 						_newPatrol params["_group","_aircraft"];
 
-						[format["_monitorAirPatrols: _newPatrol select 0 %1 | _newPatrol select 1 %2", _newPatrol select 0, _newPatrol select 1]] call GMSAI_fnc_log; 
-						[format["_monitorAirPatrols: spawned aircraft patrol at %1 using aircraft %2 with _group = %3 and _aircraft = %4",_pos, typeOf _aircraft,_group,_aircraft]] call GMSAI_fnc_log;
+						//[format["_monitorAirPatrols: _newPatrol select 0 %1 | _newPatrol select 1 %2", _newPatrol select 0, _newPatrol select 1]] call GMSAI_fnc_log; 
+						
 						if (!(isNull _group) && !(isNull _aircraft)) then {
 							_airPatrol set[1,_group];
 							_airPatrol set[2,_aircraft];
 							_airPatrol set[3,diag_tickTime];
 							_airPatrol set[4,_timesSpawned + 1];
+							[format["_monitorAirPatrols: spawned aircraft patrol at %1 using aircraft %2 with _group = %3 and _aircraft = %4",_pos, typeOf _aircraft,_group,_aircraft]] call GMSAI_fnc_log;
 							GMSAI_AirPatrolGroups pushBack _group; //  Used only to count the number of active groups serving this function.
 														// This list is monitored by _mainThread and empty or null groups are periodically removed.
 						} else {

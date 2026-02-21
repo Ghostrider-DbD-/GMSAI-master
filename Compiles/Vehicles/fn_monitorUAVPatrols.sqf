@@ -14,7 +14,7 @@
 */
 
 #include "\x\addons\GMSAI\Compiles\initialization\GMSAI_defines.hpp" 
-diag_log format["[GMSAI] _monitorUAVPatrols called at %1 with count GMSAI_UAVPatrols = %2",diag_tickTime,count GMSAI_UAVPatrols];
+//diag_log format["[GMSAI] _monitorUAVPatrols called at %1 with count GMSAI_UAVPatrols = %2",diag_tickTime,count GMSAI_UAVPatrols];
 
 if (GMSAI_monitorUAVPatrolsActive) exitWith {};
 GMSAI_monitorUAVPatrolsActive = true; 
@@ -67,7 +67,7 @@ for "_i" from 1 to (count GMSAI_UAVPatrols) do
 				//diag_log format["_monitorUAVPatrols(case 1) called"];
 				if (fuel _aircraft < 0.1) then {_aircraft setFuel 1.0};
 				#define isUAV false 
-				if (!surfaceIsWater (getPosASL _aircraft)) then {[_crewGroup,_aircraft,isUAV] call GMSAI_fnc_spawnParatroops};
+				//if (!surfaceIsWater (getPosASL _aircraft)) then {[_crewGroup,_aircraft,isUAV] call GMSAI_fnc_spawnParatroops};
 				GMSAI_UAVPatrols pushBack _uavPatrol
 			};
 			case 2: {  // Test if it is time to spawn a new aircraft
@@ -97,16 +97,18 @@ for "_i" from 1 to (count GMSAI_UAVPatrols) do
 							[] call GMSCore_fnc_getMapMarker,
 							false
 						] call GMSAI_fnc_spawnUAVPatrol;
-						[format["_monitorUAVPatrols: _newPatrol = %1", _newPatrol]] call GMSAI_fnc_log;
+						
 						_newPatrol params["_group","_aircraft"];
 
-						if !(isNull _group || isNull _aircraft) then {
+						//[format["_monitorUAVPatrols: _newPatrol = %1", _newPatrol]] call GMSAI_fnc_log;
+						if (!(isNull _group) && !(isNull _aircraft)) then {
 							_uavPatrol set[1,_group];
 							_uavPatrol set[2,_aircraft];
 							_uavPatrol set[3,diag_tickTime];
 							_uavPatrol set[4,_timesSpawned + 1];
 							GMSAI_UAVPatrolGroups pushBack _group;//  Used only to count the number of active groups serving this function.
 														// This list is monitored by _mainThread and empty or null groups are periodically removed.
+							[format["_monitorUAVPatrols: spawned aircraft patrol at %1 using aircraft %2 with _group = %3 and _aircraft = %4",_pos, typeOf _aircraft,_group,_aircraft]] call GMSAI_fnc_log;														
 						} else {
 							// Something happened - try again later
 							_uavPatrol set[5,diag_tickTime + ([_respawnTime] call GMSCore_fnc_getNumberFromRange)];
@@ -117,6 +119,7 @@ for "_i" from 1 to (count GMSAI_UAVPatrols) do
 								if (isNull _aircraft) then {_action = 2};
 							};
 							[_group] call GMSCore_fnc_destroyVehicleAndCrew; 
+							if (GMSAI_debug > 0) then {[format["_monitorUGAPatrols: GMSAI_fnc_spawnUAVPatrol returned nullGrp %1 : UGV %2", _crewGroup, _UGV]] call GMSAI_fnc_log};
 							GMSAI_UAVPatrols pushBack _uavPatrol;
 							throw _action; // _group was null for some reason	
 						};

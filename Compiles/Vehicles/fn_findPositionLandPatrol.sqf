@@ -29,7 +29,9 @@ while {_pos isEqualTo [0,0,0]} do {
 		if !(_playersNear isEqualTo []) then {
 			_pos = [0,0,0];
 		} else {
-			if ([_pos,_blacklist] call GMSCore_fnc_isBlacklisted) then {
+			// TODO: Chage to current system for blacklisted and noAggro areas 
+			//if ([_pos,_blacklist] call GMSCore_fnc_isBlacklisted) then {
+			if !([_pos, 150] call GMSCore_fnc_inAllowedLocation) then {
 				_pos = [0,0,0];
 			} else {
 				private _nearestBases = [_pos,250] call GMSCore_fnc_nearestBases;

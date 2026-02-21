@@ -11,8 +11,8 @@
 */
 class GMSAI_Build {
 	version = "1.12";
-	build = "57";
-	buildDate = "12-18-25";
+	build = "59";
+	buildDate = "1-1-26";
 };
 class CfgPatches {
 	class GMSAI {
@@ -22,6 +22,10 @@ class CfgPatches {
 		requiredAddons[] = {"GMSCore"};
 	};
 };
+class CfgGMSAI {
+	debug = 1;
+};
+
 class CfgFunctions {
 	class GMSAI {
 		class AirVehicles {
@@ -118,7 +122,7 @@ class CfgFunctions {
 		class Vehicles {
 			//  Everything related spawning/monitoring land / sea surface / SDV ehicle patrols is handled here.
 			file = "\x\addons\GMSAI\Compiles\Vehicles";
-			class aircraftHit {};
+			//class aircraftHit {};
 			class findPositionAirPatrol {};
 			class findPositionLandPatrol {};
 			class initializeVehicleWaypoints {};
@@ -131,7 +135,7 @@ class CfgFunctions {
 			class spawnUGVPatrol {};
 			class spawnUAVPatrol {};	
 			class spawnAircraftPatrol {};						
-			class vehicleCrewGetOut {};	
+			//class vehicleCrewGetOut {};	
 			class vehicleKilled {};
 			class vehicleHit {};
 			class destroyWaypoint {};

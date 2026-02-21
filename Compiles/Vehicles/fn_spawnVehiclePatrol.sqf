@@ -36,7 +36,7 @@ params[
 
 private _group = grpNull;
 private _vehicle = objNull;
-[format["_spawnVehiclePatrol: _classname %1 | _pos %2 | _patrolArea %3", _className, _pos, _patrolArea]] call GMSAI_fnc_log;
+//[format["_spawnVehiclePatrol: _classname %1 | _pos %2 | _patrolArea %3", _className, _pos, _patrolArea]] call GMSAI_fnc_log;
 
 try {
 

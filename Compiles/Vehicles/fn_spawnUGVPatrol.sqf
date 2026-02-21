@@ -31,7 +31,7 @@ params[
 		["_spawnOnRoad",true]
 ];  	
 
-[format["_spawnUGVPatrol: _spawnonRoad %1 | _markerDelete %2 | _patrolArea %3 | _pos %4 | _className %5", _spawnonRoad, _markerDelete, _patrolArea, _pos, _className]] call GMSAI_fnc_log; 
+//[format["_spawnUGVPatrol: _spawnonRoad %1 | _markerDelete %2 | _patrolArea %3 | _pos %4 | _className %5", _spawnonRoad, _markerDelete, _patrolArea, _pos, _className]] call GMSAI_fnc_log; 
 
 private _group = grpNull;
 private _vehicle = objNull;
@@ -88,7 +88,7 @@ params[
 	[_vehicle,GMSAI_forbidenWeapons,GMSAI_forbidenMagazines] call GMSCore_fnc_disableVehicleWeapons;
 	[_vehicle,GMSAI_disabledSensors] call GMSCore_fnc_disableVehicleSensors;
 	if (GMSAI_disableInfrared) then {_vehicle disableTIEquipment true};
-	[format["GMSAI_fnc_spawnUGVPatrol(137): _group %1 | _vehicle %2 | assignedVehicle driver _vehicle = %3",_group, _vehicle, assignedVehicle (driver _vehicle)]];
+	//[format["GMSAI_fnc_spawnUGVPatrol(137): _group %1 | _vehicle %2 | assignedVehicle driver _vehicle = %3",_group, _vehicle, assignedVehicle (driver _vehicle)]];
 	//_vehicle addEventHandler ["GetOut", GMSAI_fnc_vehicleGetOut];  // Could be  handy for moving a new driver or gunnner into position
 	// TODO - add any event handlers or other things not hanled by SpawnAircraftPatrol by default
 	_group addVehicle _vehicle;		
@@ -112,6 +112,6 @@ catch {
 		};
 	};
 };
-[format["_spawnUGVPatrol: _group %1 | _vehicle %2", _group, _vehicle]] call GMSAI_fnc_log;
+//[format["_spawnUGVPatrol: _group %1 | _vehicle %2", _group, _vehicle]] call GMSAI_fnc_log;
 [_group,_vehicle]
 

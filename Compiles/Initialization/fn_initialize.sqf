@@ -12,6 +12,10 @@ while {isNil "GMSCore_Initialized"} do {uiSleep 5};
 while {isNil "GMSCore_Side"} do {uisleep 5};
 while {isNil "GMSCore_modType"} do {uiSleep 5};
 
+// With debug = 1, additional debuggin information is logged or displayed on screen
+GMSAI_debug = getNumber(configFile >> "CfgGMSAI" >> "debug");
+if (GMSAI_debug > 0) then {[format["GMSAI_debug = %1", GMSAI_debug]] call GMSAI_fnc_log};
+
 GMSAI_world = worldname;
 GMSAI_worldSize = worldSize;
 GMSAI_axis = GMSAI_worldSize / 2;
@@ -246,6 +250,7 @@ GMSAI_paratroopSettings = [GMSAI_numberParatroops,GMSAI_paratroopDifficulty,GMSA
 [] call GMSAI_fnc_initializeVehiclePatrols;
 [] call GMSAI_fnc_initializeCustomSpawns;
 //[] call GMSAI_fnc_initializeSafeZones;
+
 [] spawn GMSAI_fnc_mainThread;
 
 private _build = getText(configFile >> "GMSAI_Build" >> "build");
